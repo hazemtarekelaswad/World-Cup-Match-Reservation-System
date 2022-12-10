@@ -1,7 +1,7 @@
 const config = {
     url: '',
     database: {
-        connection: 'mongodb+srv://hazemtarekelaswad:hazemtarekelaswad@cluster0.mombbsm.mongodb.net/?retryWrites=true&w=majority'
+        connection: 'mongodb+srv://hazemtarekelaswad:hazemtarekelaswad@cluster0.mombbsm.mongodb.net/WorldCup?retryWrites=true&w=majority'
     },
     server: {
         host: 'localhost',

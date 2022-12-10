@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
-const ReservedMatchSchema = new mongoose.mongoose.Schema({
-    matchId: {
+const fanSchema = new mongoose.mongoose.Schema({
+    fanId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
@@ -15,36 +15,32 @@ const ReservedMatchSchema = new mongoose.mongoose.Schema({
     }
 })
 
-const UserSchema = new mongoose.Schema({
-    username: {
+const MatchSchema = new mongoose.Schema({
+    firstTeam: {
         type: String,
         required: true
     },
-    password: {
+    secondTeam: {
         type: String,
         required: true
     },
-    firstName: {
+    stadium: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    date: {
+        type: Date, // includes date ant time
+        required: true
+    },
+    referee: {
         type: String,
         required: true
     },
-    lastName: {
-        type: String,
-        required: true
-    },
-    birthDate: {
-        type: Date,
-        required: true
-    },
-    gender: {
-        type: String,
-        required: true
-    },
-    nationality: {
+    firstLineman: {
         type: String,
         required: false
     },
-    email: {
+    secondLineman: {
         type: String,
         required: true
     },
@@ -56,13 +52,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    matches: {
-        type: [ReservedMatchSchema]
+    fans: {
+        type: [fanSchema]
     }
 })
 
-const User = mongoose.model('User', UserSchema)
+const Match = mongoose.model('Match', MatchSchema)
 
-
-// Export models
-module.exports = { User }
+// Exported models
+module.exports = { Match }
