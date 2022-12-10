@@ -1,11 +1,12 @@
 const express = require('express')
+const mongoose = require('mongoose');
+
+const config = require('./config/config')
+
 const app = express()
 
-const PORT = 3030
+mongoose.connect(config.database.connection).then(() => { console.log('Connected successfully to DB') })
 
 
-app.get('/users', (req, res) => {
-    res.send('<h1>shit</h1>')
-})
 
-app.listen(PORT, () => { console.log(`Starting server on port ${PORT}`) })
+app.listen(config.server.port, () => { console.log(`Starting server on port ${config.server.port}`) })
