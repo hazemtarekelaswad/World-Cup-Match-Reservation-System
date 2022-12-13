@@ -14,7 +14,7 @@ const comparePassword = async (password, hash) => await bcrypt.compare(password,
 
 const createToken = (user) => jwt.sign(user, config.auth.privateKey)
 
-const validateUser = (userData) => {
+const validateUserSignup = (userData) => {
     const schema = Joi.object({
         username: Joi.string().trim().min(1).max(100).required(),
         password: Joi.string().min(8).max(50).required(),
@@ -30,10 +30,20 @@ const validateUser = (userData) => {
     return schema.validate(userData)
 }
 
+const validateUserSignin = (userData) => {
+    const schema = Joi.object({
+        username: Joi.string().trim().min(1).max(100).required(),
+        password: Joi.string().min(8).max(50).required(),
+    })
+    return schema.validate(userData)
+}
+
 
 module.exports = {
     userStatus,
     hashPassword,
-    validateUser,
+    comparePassword,
+    validateUserSignup,
+    validateUserSignin,
     createToken
 }
