@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const { User } = require('../models/user-model')
+const userController = require('../controllers/user-controller')
 
 
-// TODO: Handle HTTP requests
+router.post('/users/signup', userController.signup)
 
 
 

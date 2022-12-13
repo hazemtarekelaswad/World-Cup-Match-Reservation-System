@@ -18,7 +18,10 @@ const ReservedMatchSchema = new mongoose.mongoose.Schema({
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        unique: true,
+        minLength: 1
     },
     password: {
         type: String,
@@ -26,35 +29,60 @@ const UserSchema = new mongoose.Schema({
     },
     firstName: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minLength: 1
     },
     lastName: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minLength: 1
     },
     birthDate: {
-        type: Date,
-        required: true
+        type: Date,         // 'yyyy-mm-dd' 
+        required: true,
     },
     gender: {
         type: String,
-        required: true
+        required: true,
+        enum: ['M', 'F'],
+        trim: true,
+        minLength: 1,
+        maxLength: 1,
+        uppercase: true,
     },
     nationality: {
         type: String,
-        required: false
+        required: false,
+        trim: true,
+        minLength: 1,
+        lowercase: true
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        trim: true,
+        lowercase: true,
+        validate: {
+            validator: (email) => {
+                const regex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/
+                return regex.test(email)
+            }
+        }
     },
     role: {
         type: String,
-        required: true
+        required: true,
+        enum: ['fan', 'manager', 'admin'],
+        trim: true
     },
     status: {
         type: String,
-        required: true
+        required: true,
+        enum: ['pending', 'approved'],
+        trim: true
     },
     matches: {
         type: [ReservedMatchSchema]

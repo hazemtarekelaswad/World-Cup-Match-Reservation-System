@@ -22,7 +22,7 @@ app.use(userRoute)
 app.use(matchRoute)
 app.use(stadiumRoute)
 
-/////////////////
+
 
 // Starting the server
 app.listen(config.server.port, () => { console.log(`Starting server on port ${config.server.port}`) })
