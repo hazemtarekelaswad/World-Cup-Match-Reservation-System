@@ -74,7 +74,8 @@ const signin = async (req, res) => {
     const token = userHelper.createToken({ 
         "id": user._id, 
         "username": user.username, 
-        "email": user.email 
+        "email": user.email,
+        "role": user.role
     })
 
     res.status(200).send({
