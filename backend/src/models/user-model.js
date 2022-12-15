@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ReservedMatchSchema = new mongoose.mongoose.Schema({
+const ReservedMatchSchema = new mongoose.Schema({
     matchId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true

@@ -38,12 +38,24 @@ const validateUserSignin = (userData) => {
     return schema.validate(userData)
 }
 
+const validateUserUpdate = (userData) => {
+    const schema = Joi.object({
+        firstName: Joi.string().trim().min(1).max(100),
+        lastName: Joi.string().trim().min(1).max(100),
+        birthDate: Joi.date(),
+        gender: Joi.string().trim().uppercase().valid('M', 'F'),
+        nationality: Joi.string().trim().min(1).max(100),
+        role: Joi.string().trim().lowercase().valid('fan', 'manager', 'admin'),
+    })
+    return schema.validate(userData)
+}
 
 module.exports = {
     userStatus,
     hashPassword,
     comparePassword,
+    createToken,
     validateUserSignup,
     validateUserSignin,
-    createToken
+    validateUserUpdate
 }

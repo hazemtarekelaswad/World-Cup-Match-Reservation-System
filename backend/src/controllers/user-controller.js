@@ -72,7 +72,7 @@ const signin = async (req, res) => {
 
     // Create token and send it
     const token = userHelper.createToken({ 
-        "id": user._id, 
+        "_id": user._id, 
         "username": user.username, 
         "email": user.email,
         "role": user.role
@@ -85,7 +85,60 @@ const signin = async (req, res) => {
     })
 }
 
+const getUser = async (req, res) => {
+    const user = await User.findOne({ _id: req.authUser._id })
+
+    // Verify if the user is not found
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    // Success, send the user's data
+    // TODO: extract all reserved matches to send them along with user data
+    // matchesToSend = 
+    userToSend = { 
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        birthDate: user.birthDate,
+        gender: user.gender,
+        nationality: user.nationality,
+        email: user.email,
+        role: user.role,
+        matches: user.matches
+    }
+    res.status(200).send(userToSend)
+
+
+}
+
+const updateUser = async (req, res) => {
+
+    // Validate the request body
+    const { error } = userHelper.validateUserUpdate(req.body)
+    if (error) return res.status(400).send({
+        "status": "failure",
+        "message": error.details[0].message
+    })
+
+    // Update the user
+    const user = await User.findOneAndUpdate({ _id: req.authUser._id }, { $set: req.body })
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    res.status(201).send({
+        "status": "success",
+        "message": "User has been updated successfully"
+    })
+    
+}
+
 module.exports = { 
     signup,
-    signin
+    signin,
+    getUser,
+    updateUser
 }

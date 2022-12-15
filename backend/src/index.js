@@ -9,6 +9,7 @@ const config = require('./config/config')
 const userRoute = require('./routes/user-route')
 const matchRoute = require('./routes/match-route')
 const stadiumRoute = require('./routes/stadium-route')
+const adminRoute = require('./routes/admin-route')
 
 // Initializations
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.json())
 app.use(userRoute)
 app.use(matchRoute)
 app.use(stadiumRoute)
+app.use(adminRoute)
 
 
 
