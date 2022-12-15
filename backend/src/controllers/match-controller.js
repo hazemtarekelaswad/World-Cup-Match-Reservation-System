@@ -40,22 +40,59 @@ const updateMatch = async (req, res) => {
     res.status(200).send({match});
 }
 const getMatch = async (req, res) => {
+    const match = await Match.findById(req.params.id)
+    const stadium = await Stadium.findById(match.stadium)
 
-    const match =await Match.findById(req.params.id)
+    const matchToSend = {
+        firstTeam: match.firstTeam,
+        secondTeam: match.firstTeam,
+        stadium: {
+            name: stadium.name,
+            columnsCount: stadium.columnsCount,
+            rowsCount: stadium.rowsCount
+        },
+        date: match.date,
+        referee: match.referee,
+        firstLineman: match.firstLineman,
+        secondLineman: match.secondLineman,
+        fans: match.fans,
+    }
+
     console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
-    res.status(200).send({match});
+    res.status(200).send(matchToSend)
 }
+
 const deleteMatch = async (req, res) => {
 
     const match =await Match.deleteOne({"_id":req.params.id})
     console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
     res.status(200).send({match});
 }
-const getallMatch = async (req, res) => {
+const getAllMatches = async (req, res) => {
 
-    const matchs =await Match.find()
-    console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", matchs)
-    res.status(200).send({matchs});
+    const matches = await Match.find()
+    matchesToSend = []
+    for (let match of matches) {
+        const stadium = await Stadium.findById(match.stadium)
+        const matchToSend = {
+            firstTeam: match.firstTeam,
+            secondTeam: match.firstTeam,
+            stadium: {
+                name: stadium.name,
+                columnsCount: stadium.columnsCount,
+                rowsCount: stadium.rowsCount
+            },
+            date: match.date,
+            referee: match.referee,
+            firstLineman: match.firstLineman,
+            secondLineman: match.secondLineman,
+            fans: match.fans,
+        }
+        matchesToSend.push(matchToSend)
+    }
+    
+    console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", matches)
+    res.status(200).send(matchesToSend)
 }
 
 
@@ -63,6 +100,6 @@ module.exports = {
     createMatch,
     updateMatch,
     getMatch,
-    getallMatch,
+    getAllMatches,
     deleteMatch
 }

@@ -96,6 +96,7 @@ const getUser = async (req, res) => {
 
     // Success, send the user's data
     // TODO: extract all reserved matches to send them along with user data
+    
     // matchesToSend = 
     userToSend = { 
         username: user.username,
