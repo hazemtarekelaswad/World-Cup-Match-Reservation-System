@@ -96,7 +96,7 @@ const getUser = async (req, res) => {
 
     // Success, send the user's data
     // TODO: extract all reserved matches to send them along with user data
-    
+
     // matchesToSend = 
     userToSend = { 
         username: user.username,
@@ -137,9 +137,26 @@ const updateUser = async (req, res) => {
     
 }
 
+
+// const reserveSeat = async (req, res) => {
+    // validate future match
+    // validate that you haven't reserved any match at the same time of this match
+    // validate vacant seat
+
+    // reserve the seat by adding user to matchFans, and by adding match to userMatches
+    // generate unique number and send it to the user
+
+// }
+
+// const cancelSeat = async (req, res) => {
+
+// }
+
 module.exports = { 
     signup,
     signin,
     getUser,
-    updateUser
+    updateUser,
+    reserveSeat,
+    cancelSeat
 }
