@@ -158,6 +158,6 @@ module.exports = {
     signin,
     getUser,
     updateUser,
-    reserveSeat,
-    cancelSeat
+    // reserveSeat,
+    // cancelSeat
 }
