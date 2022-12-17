@@ -139,6 +139,7 @@ const updateUser = async (req, res) => {
 
 
 // const reserveSeat = async (req, res) => {
+    // validate role = fan, not manager or admin can reserve a seat
     // validate future match
     // validate that you haven't reserved any match at the same time of this match
     // validate vacant seat
