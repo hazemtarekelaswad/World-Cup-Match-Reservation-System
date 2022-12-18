@@ -179,12 +179,12 @@ const reserveSeat = async (req, res) => {
                 "message": "You have already reserved this seat"
             })
         
-        // validate that you haven't reserved any match at the same time of this match
-        const matchData = await Match.findOne({ _id: match.matchId })
-        if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
-            "status": "failure",
-            "message": "You have reserved another match at the same time. They will be clashing matches"
-        })
+        // // validate that you haven't reserved any match at the same time of this match
+        // const matchData = await Match.findOne({ _id: match.matchId })
+        // if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
+        //     "status": "failure",
+        //     "message": "You have reserved another match at the same time. They will be clashing matches"
+        // })
         
     }
 
@@ -209,13 +209,14 @@ const reserveSeat = async (req, res) => {
     
     // validate vacant seat
     for (let fan of currMatch.fans) {
-        if (fan.seatColumn == req.body.seatColumn || fan.seatRow == req.body.seatRow) 
+        if (fan.seatColumn == req.body.seatColumn && fan.seatRow == req.body.seatRow) 
             return res.status(400).send({
                 "status": "failure",
                 "message": "This seat is reserved"
             })
     }
 
+    // Success
     try {
         await User.updateOne({ _id: user._id }, { $push: { matches: {
             "matchId": req.body.matchId,
