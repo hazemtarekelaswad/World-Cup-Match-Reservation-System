@@ -1,8 +1,13 @@
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto-js')
+const mongoose = require('mongoose')
+
 
 const userHelper = require('../helpers/user-helper')
 
 const { User } = require('../models/user-model')
+const { Match } = require('../models/match-model')
+const { Stadium } = require('../models/stadium-model')
 
 const signup = async (req, res) => {
     req.body.status = userHelper.userStatus.pending
@@ -138,16 +143,109 @@ const updateUser = async (req, res) => {
 }
 
 
-// const reserveSeat = async (req, res) => {
-    // validate role = fan, not manager or admin can reserve a seat
+const reserveSeat = async (req, res) => {
+    // validate the role of fan in order to reserve the seat
+    if (req.authUser.role != "fan") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a fan"
+    })
+
+    // validate incoming body
+    const { error } = userHelper.validateSeatReservation(req.body)
+    if (error) return res.status(400).send({
+        "status": "failure",
+        "message": error.details[0].message
+    })
+
+    req.body.matchId = mongoose.Types.ObjectId(req.body.matchId)
+
+    // validate duplicate seat in the same match
+    const user = await User.findOne({ _id: req.authUser._id })
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    const currMatch = await Match.findOne({ _id: req.body.matchId })
+    if (!currMatch) return res.status(400).send({
+        "status": "failure",
+        "message": "Match does not exist in the system"
+    })
+
+    for (let match of user.matches) {
+        if (match.matchId.equals(req.body.matchId) && match.seatColumn == req.body.seatColumn && match.seatRow == req.body.seatRow) 
+            return res.status(400).send({
+                "status": "failure",
+                "message": "You have already reserved this seat"
+            })
+        
+        // validate that you haven't reserved any match at the same time of this match
+        const matchData = await Match.findOne({ _id: match.matchId })
+        if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
+            "status": "failure",
+            "message": "You have reserved another match at the same time. They will be clashing matches"
+        })
+        
+    }
+
     // validate future match
-    // validate that you haven't reserved any match at the same time of this match
+    if (currMatch.date.getTime() < Date.now()) return res.status(400).send({
+        "status": "failure",
+        "message": "Match has already finished"
+    })
+    
+    // validate the if the seat is correct based on the stadium shape
+    const currStadium = await Stadium.findOne({ _id: currMatch.stadium })
+    if (!currStadium) return res.status(400).send({
+        "status": "failure",
+        "message": "Stadium does not exist in the system"
+    })
+
+    if (req.body.seatColumn >= currStadium.columnsCount || req.body.seatRow >= currStadium.rowsCount)
+        return res.status(400).send({
+            "status": "failure",
+            "message": "seatColumn or seatRow is out of range"
+        })
+    
     // validate vacant seat
+    for (let fan of currMatch.fans) {
+        if (fan.seatColumn == req.body.seatColumn || fan.seatRow == req.body.seatRow) 
+            return res.status(400).send({
+                "status": "failure",
+                "message": "This seat is reserved"
+            })
+    }
 
-    // reserve the seat by adding user to matchFans, and by adding match to userMatches
+    try {
+        await User.updateOne({ _id: user._id }, { $push: { matches: {
+            "matchId": req.body.matchId,
+            "seatRow": req.body.seatRow,
+            "seatColumn": req.body.seatColumn
+        }}})
+
+        await Match.updateOne({ _id: currMatch._id }, { $push: { fans: {
+            "fanId":  user._id,
+            "seatRow": req.body.seatRow,
+            "seatColumn": req.body.seatColumn
+        }}})
+
+    } catch (err) {
+        res.status(500).send({
+            "status": "failure",
+            "message": "Internal server error"
+        })
+    }
+
     // generate unique number and send it to the user
+    const ticketNumber = crypto.AES.encrypt(JSON.stringify({ 
+        creditCard: req.body.creditCard, 
+        pinNumber: req.body.pinNumber 
+    }), "private key for credit card and pin number").toString()
 
-// }
+    res.status(201).send({
+        "ticket": ticketNumber
+    })
+}
 
 // const cancelSeat = async (req, res) => {
 
@@ -158,6 +256,6 @@ module.exports = {
     signin,
     getUser,
     updateUser,
-    // reserveSeat,
+    reserveSeat
     // cancelSeat
 }

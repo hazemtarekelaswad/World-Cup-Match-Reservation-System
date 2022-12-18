@@ -50,6 +50,17 @@ const validateUserUpdate = (userData) => {
     return schema.validate(userData)
 }
 
+const validateSeatReservation = (reservationInfo) => {
+    const schema = Joi.object({
+        matchId: Joi.string().trim().required(),
+        seatColumn: Joi.number().integer().positive().required(),
+        seatRow: Joi.number().integer().positive().required(),
+        creditCard: Joi.string().trim().required(),
+        pinNumber: Joi.number().integer().positive().required(),
+    })
+    return schema.validate(reservationInfo)
+}
+
 module.exports = {
     userStatus,
     hashPassword,
@@ -57,5 +68,6 @@ module.exports = {
     createToken,
     validateUserSignup,
     validateUserSignin,
-    validateUserUpdate
+    validateUserUpdate,
+    validateSeatReservation
 }
