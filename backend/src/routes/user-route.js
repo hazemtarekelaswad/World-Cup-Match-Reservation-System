@@ -11,8 +11,7 @@ router.put('/users/me', auth.verifyToken, userController.updateUser)
 // TODO: create endpoint for updating password, or just put this functionality in updateUser endpoint
 
 router.put('/users/reservation', auth.verifyToken, userController.reserveSeat) 
-
-// router.put('/users/cancellation', auth.verifyToken, userController.cancelSeat)
+router.put('/users/cancellation', auth.verifyToken, userController.cancelSeat)
 
 
 

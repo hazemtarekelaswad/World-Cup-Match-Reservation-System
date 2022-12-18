@@ -248,15 +248,89 @@ const reserveSeat = async (req, res) => {
     })
 }
 
-// const cancelSeat = async (req, res) => {
+const cancelSeat = async (req, res) => {
+    // validate the role of fan in order to reserve the seat
+    if (req.authUser.role != "fan") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a fan"
+    })
 
-// }
+    // validate incoming body
+    const { error } = userHelper.validateSeatCancellation(req.body)
+    if (error) return res.status(400).send({
+        "status": "failure",
+        "message": error.details[0].message
+    })
+
+    req.body.matchId = mongoose.Types.ObjectId(req.body.matchId)
+
+    // validate duplicate seat in the same match
+    const user = await User.findOne({ _id: req.authUser._id })
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    const currMatch = await Match.findOne({ _id: req.body.matchId })
+    if (!currMatch) return res.status(400).send({
+        "status": "failure",
+        "message": "Match does not exist in the system"
+    })
+
+    let isFound = false
+    for (let match of user.matches) {
+        if (match.matchId.equals(req.body.matchId) && match.seatColumn == req.body.seatColumn && match.seatRow == req.body.seatRow) {
+            isFound = true
+            break
+        }
+    }
+
+    if (!isFound) return res.status(400).send({
+        "status": "failure",
+        "message": "You are not the one who reserved this seat to cancel"
+    })
+
+    // If found, validate its 3 days limit
+    if (currMatch.date.getTime() <= Date.now() || Math.abs(currMatch.date.getTime() - Date.now()) / (1000*3600*24) > 3) return res.status(400).send({
+        "status": "failure",
+        "message": "Cancellation is available only in 3 days before the match time"
+    })
+
+    // Cancel reservation by removing it from matches and remove fan from fans    
+    try {
+        await User.updateOne({ _id: user._id }, { $pull: { matches: {
+            "matchId": req.body.matchId,
+            "seatRow": req.body.seatRow,
+            "seatColumn": req.body.seatColumn
+        }}})
+
+        await Match.updateOne({ _id: currMatch._id }, { $pull: { fans: {
+            "fanId":  user._id,
+            "seatRow": req.body.seatRow,
+            "seatColumn": req.body.seatColumn
+        }}})
+
+        res.status(201).send({
+            "status": "success",
+            "message": "Cancelled successfully"
+        })
+
+    } catch (err) {
+        res.status(500).send({
+            "status": "failure",
+            "message": "Internal server error"
+        })
+    }
+
+    
+
+}
 
 module.exports = { 
     signup,
     signin,
     getUser,
     updateUser,
-    reserveSeat
-    // cancelSeat
+    reserveSeat,
+    cancelSeat
 }

@@ -61,6 +61,15 @@ const validateSeatReservation = (reservationInfo) => {
     return schema.validate(reservationInfo)
 }
 
+const validateSeatCancellation = (reservationInfo) => {
+    const schema = Joi.object({
+        matchId: Joi.string().trim().required(),
+        seatColumn: Joi.number().integer().positive().required(),
+        seatRow: Joi.number().integer().positive().required(),
+    })
+    return schema.validate(reservationInfo)
+}
+
 module.exports = {
     userStatus,
     hashPassword,
@@ -69,5 +78,6 @@ module.exports = {
     validateUserSignup,
     validateUserSignin,
     validateUserUpdate,
-    validateSeatReservation
+    validateSeatReservation,
+    validateSeatCancellation
 }
