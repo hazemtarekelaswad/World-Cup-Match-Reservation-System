@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const crypto = require('crypto-js')
 const mongoose = require('mongoose')
 
-
 const userHelper = require('../helpers/user-helper')
 
 const { User } = require('../models/user-model')
@@ -100,9 +99,6 @@ const getUser = async (req, res) => {
     })
 
     // Success, send the user's data
-    // TODO: extract all reserved matches to send them along with user data
-
-    // matchesToSend = 
     userToSend = { 
         username: user.username,
         firstName: user.firstName,
@@ -115,8 +111,6 @@ const getUser = async (req, res) => {
         matches: user.matches
     }
     res.status(200).send(userToSend)
-
-
 }
 
 const updateUser = async (req, res) => {
@@ -321,9 +315,6 @@ const cancelSeat = async (req, res) => {
             "message": "Internal server error"
         })
     }
-
-    
-
 }
 
 module.exports = { 
