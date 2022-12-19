@@ -407,3 +407,46 @@ status: `201`
 </details> 
 
 ---
+
+<!-- Section -->
+## Managers
+<!-- Endpoint -->
+<details><summary><h3>Get Teams</h3></summary>
+
+**`GET`** | `/teams`
+
+**Headers**
+
+**`Token:`** "string"
+
+**Response**
+
+status: `401` 
+```json
+{
+    "status": "failure",
+    "message": "Unauthorized request, provide a token"
+}
+```
+
+status: `403` 
+```json
+{
+    "status": "failure",
+    "message": "<error_msg>"
+}
+```
+
+status: `200`
+```json
+{
+    "teams": [
+        {
+            "name": "string"
+        }
+    ]
+}
+```
+</details>
+
+---

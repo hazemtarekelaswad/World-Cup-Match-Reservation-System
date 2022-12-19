@@ -105,7 +105,7 @@ const getTeams = async (req, res) => {
     const teams = await Team.find()
     teamsToSend = []
     for (let team of teams) teamsToSend.push({name: team.name})
-    res.status(200).send(teamsToSend)
+    res.status(200).send({"teams": teamsToSend})
 }
 
 
