@@ -1,0 +1,206 @@
+.login{
+    width: 100%;
+    height: 100vh;
+}
+
+.login-wrapper{
+    width: 40%;
+    height: 100%;
+    margin: auto auto;
+    display: flex;
+    /* align-items: center; */
+    top: 10vh;
+    justify-content: center;
+}
+
+.login-container{
+    max-width: 500px;
+    min-width: 400px;
+    /* max-height: 600px;
+    min-height: 500px; */
+    width: 100%;
+    height: fit-content;
+
+    margin-top: 50px;
+}
+
+.img-container{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    position: relative;
+}
+
+.img{
+    background-color: #FE024F;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    position: absolute;
+    top: 75px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-container{
+    height: fit-content;
+    width: 100%;
+    background-color: #491e2c;
+    border-radius: 25px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.form-wrapper{
+    width: 80%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputs-container{
+    padding-top: 120px;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username-container{
+    display: flex;
+}
+
+.password-container{
+    display: flex;
+}
+
+.input{
+    width: 260px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #8b324d;
+}
+
+.input input {
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #8b324d;
+    color: white;
+}
+
+.input input::placeholder {
+    padding: 5px;
+    color: white;
+}
+
+.icon{
+    width: 40px;
+    height: 40px;
+    background-color: #FE024F;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container{
+    margin-bottom: 30px;
+    background-color: #FE024F;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: #1E1E40;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.button-container button{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #FE024F;
+    border: none;
+    color: #491e2c;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.button-container button:active{
+    transform: translateY(4px);
+}
+
+
+.icon-item{
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+.icon-img{
+    width: 75px;
+    height: 75px;
+    color: white;
+}
+
+/* .button-container:hover{
+    background-color: #6c7a8a;
+} */
+
+.Name-container{
+    display: flex;
+    justify-content: space-between;
+    width: 260px;
+    height: 40px;
+}
+
+.last-name, .first-name{
+    width: 45%;
+    height: 40px;
+    
+}
+
+.last-name input::placeholder, .first-name input::placeholder {
+    padding: 5px;
+    color: white;
+}
+
+.first-name input{
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #8b324d;
+    color: white;
+}
+
+.last-name input{
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #8b324d;
+    color: white;
+}
+
+.DatePicker{
+    color: white;
+    
+}
