@@ -9,8 +9,8 @@
     margin: auto auto;
     display: flex;
     /* align-items: center; */
-    top: 10vh;
     justify-content: center;
+    position: relative;
 }
 
 .login-container{
@@ -20,8 +20,12 @@
     min-height: 500px; */
     width: 100%;
     height: fit-content;
+    
+}
 
-    margin-top: 50px;
+.signup-style{
+    top: -50px;
+    position: absolute;
 }
 
 .img-container{
@@ -56,18 +60,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 30px;
 }
 
 .form-wrapper{
-    width: 80%;
+    width: 100%;
     height: fit-content;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .inputs-container{
@@ -106,7 +110,7 @@
 }
 
 .input input::placeholder {
-    padding: 5px;
+    padding: 10px;
     color: white;
 }
 
@@ -169,7 +173,7 @@
 .Name-container{
     display: flex;
     justify-content: space-between;
-    width: 260px;
+    width: 298px;
     height: 40px;
 }
 
@@ -180,7 +184,7 @@
 }
 
 .last-name input::placeholder, .first-name input::placeholder {
-    padding: 5px;
+    padding: 15px;
     color: white;
 }
 
@@ -202,5 +206,55 @@
 
 .DatePicker{
     color: white;
-    
+
+}
+
+.email-container{
+    display: flex;
+}
+.nationality-container{
+    display: flex;
+}
+
+
+.birth-date-container{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: #8b324d;
+    padding: 0 5%;
+    color: white;
+}
+
+.birth-date-container .DatePicker{
+    border: none;
+}
+
+.gender-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: #8b324d;
+}
+.Dropdown{
+    width: 260px;
+    background-color: #8b324d;
+    border: none;
+}
+
+.footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.change-mode{
+    margin: 0 auto 10px;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
 }
