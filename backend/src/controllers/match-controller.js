@@ -45,6 +45,7 @@ const getMatch = async (req, res) => {
     const stadium = await Stadium.findById(match.stadium)
 
     const matchToSend = {
+        matchId: match._id,
         firstTeam: match.firstTeam,
         secondTeam: match.firstTeam,
         stadium: {
@@ -76,6 +77,7 @@ const getAllMatches = async (req, res) => {
     for (let match of matches) {
         const stadium = await Stadium.findById(match.stadium)
         const matchToSend = {
+            matchId: match._id,
             firstTeam: match.firstTeam,
             secondTeam: match.firstTeam,
             stadium: {
