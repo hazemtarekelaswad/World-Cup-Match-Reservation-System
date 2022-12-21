@@ -450,3 +450,79 @@ status: `200`
 </details>
 
 ---
+
+<!-- Endpoint -->
+<details><summary><h3>Get Matches</h3></summary>
+
+**`GET`** | `/matches`
+
+**Response**
+
+status: `200`
+```json
+[
+    {
+        "matchId": "string",
+        "firstTeam": "string",
+        "secondTeam": "string",
+        "stadium": {
+            "name": "string",
+            "columnsCount": "number",
+            "rowsCount": "number"
+        },
+        "date": "date",
+        "referee": "string",
+        "firstLineman": "string",
+        "secondLineman": "string",
+        "fans": [
+            {
+                "fanId": "string",
+                "seatRow": "number",
+                "seatColumn": "number",
+                "_id": "string"
+            }
+        ]
+    }
+]
+```
+</details>
+
+---
+
+<!-- Endpoint -->
+<details><summary><h3>Get Specfic Match</h3></summary>
+
+**`GET`** | `/matches/:id`
+
+**Response**
+
+status: `200`
+```json
+
+{
+    "matchId": "string",
+    "firstTeam": "string",
+    "secondTeam": "string",
+    "stadium": {
+        "name": "string",
+        "columnsCount": "number",
+        "rowsCount": "number"
+    },
+    "date": "date",
+    "referee": "string",
+    "firstLineman": "string",
+    "secondLineman": "string",
+    "fans": [
+        {
+            "fanId": "string",
+            "seatRow": "number",
+            "seatColumn": "number",
+            "_id": "string"
+        }
+    ]
+}
+
+```
+</details>
+
+---
