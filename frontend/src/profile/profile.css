@@ -6,7 +6,22 @@
     height: 100%;
     width: 100%;
     background-color: #fff;
-    margin-top: 200px;    
+    margin-top: 180px;    
+}
+
+.profile .profile_header{
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 90;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #74052f;
+    color: #fff;
 }
 
 .profile-content{
@@ -14,7 +29,118 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: right;
-    
+    justify-content: center;
 }
 
+.profile-img-container{
+    position: fixed;
+    right: 80px;
+    top: 50px;
+    z-index: 100;
+}
+.profile-img{
+    width: 600px;
+    height: 600px;
+}
+
+.profile-icon-img{
+    width: 100%;
+    height: 100%;
+}
+
+.content-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.profile-item{
+    height: 40px;
+    width: 35%;
+    min-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.field-container{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.edit-icon{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    z-index: 110;
+}
+.profile-icon{
+    height: 60%;
+    width: 60%;
+}
+
+.profile-field{
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.profile-field #firstname, .profile-field #lastname, .profile-field #nationality, .profile-field #password,
+.profile-field{
+    width: 280px;
+    height: 40px;
+    border: none;
+    background-color: #ecfaff;
+    color: #000;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+
+.button-container{
+    margin-top: 20px;
+    background-color: #8ad6ef;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: #645434;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container button{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #3bceff;
+    border: none;
+    color: #74052f;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}

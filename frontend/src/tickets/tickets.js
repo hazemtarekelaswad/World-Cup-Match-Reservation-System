@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import "./tickets.css";
 import Header from "../components/header/header";
 //TODO:

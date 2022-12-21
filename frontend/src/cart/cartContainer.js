@@ -1,6 +1,6 @@
 
 import "./cart.css";
-import { useState } from "react";
+// import { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Cart from "./cart";

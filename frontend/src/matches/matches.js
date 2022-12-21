@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import Tickets from "./../tickets/tickets";
+// import Tickets from "./../tickets/tickets";
 // import to fetch data from backend
 import { useState, useEffect } from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+// import axios from "axios";
+// import { Link } from "react-router-dom";
 import CartContainer from "../cart/cartContainer";
 
 function Matches() {

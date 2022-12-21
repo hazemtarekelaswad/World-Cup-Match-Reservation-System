@@ -4,7 +4,7 @@ import bg from "./../imges/t.png";
 import toy from "./../imges/toy.png";
 import "./home.css";
 import Header from "./../components/header/header";
-import Footer from "./../components/footer/footer";
+// import Footer from "./../components/footer/footer";
 function Home() {
   return (
     <div className="home">

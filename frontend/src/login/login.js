@@ -75,7 +75,7 @@ function Login({signupParam}) {
                                     <FontAwesomeIcon className='icon-item' icon={faVenusMars} />
                                 </div>
                                 <div className='gender'>
-                                    <Dropdown className="Dropdown" options={['M', 'F']} value={''} placeholder="Select your gender" />
+                                    <Dropdown className="Dropdown" options={['Male', 'Female']} value={''} placeholder="Select your gender" />
                                 </div>
                             </div>}
 
