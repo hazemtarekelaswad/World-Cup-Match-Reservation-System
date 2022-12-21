@@ -14,8 +14,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/login" element={<Login />} />
-          //TODO: change this to include the match id
-          <Route path="/tickets" element={<Tickets />} />
+          {/* TODO: change it to signup */}
+          <Route path="/signup" element={<Login />} />
+          {/* TODO: change this to include the match id */}
+          <Route path="/tickets/:id" element={<Tickets />} />
         </Routes>
       </BrowserRouter>
     </div>
