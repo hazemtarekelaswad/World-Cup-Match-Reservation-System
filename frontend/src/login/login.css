@@ -1,6 +1,8 @@
 .login{
     width: 100%;
     height: 100vh;
+    background-image: url('../imges/t.png');
+    position: fixed;
 }
 
 .login-wrapper{
@@ -33,10 +35,10 @@
     height: 150px;
     margin: auto;
     position: relative;
+    z-index: 100;
 }
 
 .img{
-    background-color: #FE024F;
     border-radius: 50%;
     height: 150px;
     width: 150px;
@@ -54,13 +56,13 @@
 .form-container{
     height: fit-content;
     width: 100%;
-    background-color: #491e2c;
+    background-color: #74052f;
     border-radius: 25px;
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
 }
 
 .form-wrapper{
@@ -71,11 +73,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .inputs-container{
-    padding-top: 120px;
+    padding-top: 100px;
     
 
     display: flex;
@@ -98,26 +100,26 @@
     justify-content: center;
     align-items: center;
 
-    background-color: #8b324d;
+    background-color: #ecfaff;
 }
 
 .input input {
     width: 99%;
     height: 95%;
     border: none;
-    background-color: #8b324d;
-    color: white;
+    background-color: #ecfaff;
+    color: #000;
 }
 
 .input input::placeholder {
     padding: 10px;
-    color: white;
+    color: #000;
 }
 
 .icon{
     width: 40px;
     height: 40px;
-    background-color: #FE024F;
+    background-color: #3bceff;
 
     display: flex;
     justify-content: center;
@@ -126,7 +128,7 @@
 
 .button-container{
     margin-bottom: 30px;
-    background-color: #FE024F;
+    background-color: #3bceff;
     width: 100px;
     height: 40px;
     border-radius: 5px;
@@ -142,11 +144,12 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
-    background-color: #FE024F;
+    background-color: #3bceff;
     border: none;
-    color: #491e2c;
+    color: #74052f;
     font-weight: 600;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .button-container button:active{
@@ -161,8 +164,8 @@
 }
 
 .icon-img{
-    width: 75px;
-    height: 75px;
+    width: 200px;
+    height: 200px;
     color: white;
 }
 
@@ -185,27 +188,27 @@
 
 .last-name input::placeholder, .first-name input::placeholder {
     padding: 15px;
-    color: white;
+    color: #000;
 }
 
 .first-name input{
     width: 99%;
     height: 95%;
     border: none;
-    background-color: #8b324d;
-    color: white;
+    background-color: #ecfaff;
+    color: #000;
 }
 
 .last-name input{
     width: 99%;
     height: 95%;
     border: none;
-    background-color: #8b324d;
-    color: white;
+    background-color: #ecfaff;
+    color: #000;
 }
 
 .DatePicker{
-    color: white;
+    color: #000;
 
 }
 
@@ -223,9 +226,9 @@
     justify-content: space-between;
     align-items: center;
     height: 40px;
-    background-color: #8b324d;
+    background-color: #ecfaff;
     padding: 0 5%;
-    color: white;
+    color: #000;
 }
 
 .birth-date-container .DatePicker{
@@ -238,11 +241,11 @@
     justify-content: space-between;
     align-items: center;
     height: 40px;
-    background-color: #8b324d;
+    background-color: #ecfaff;
 }
 .Dropdown{
     width: 260px;
-    background-color: #8b324d;
+    background-color: #ecfaff;
     border: none;
 }
 
@@ -254,7 +257,8 @@
 
 .change-mode{
     margin: 0 auto 10px;
-    color: white;
+    color: #3bceff;
     font-size: 12px;
     cursor: pointer;
+    text-decoration: underline;
 }

@@ -14,7 +14,20 @@
 
   background-color: #74052f;
   color: #fff;
+
+  width: 100%;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 90;
 }
+
+.grid__body{
+  width: 100%;
+  height: 100%;
+  margin-top: 180px;
+}
+
 .row {
   background: #fff;
   padding: 10px;

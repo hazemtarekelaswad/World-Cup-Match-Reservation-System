@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import "./tickets.css";
-import Header from "./../components/header/header";
+import Header from "../components/header/header";
 //TODO:
 // 1- get the match id from the url
 // 2- get the match data from the backend
@@ -53,19 +53,21 @@ function Tickets({ matchID }) {
           <h1>VS</h1>
           <h1>{match.secondTeam}</h1>
         </div>
-        {rows.map((row, rowIndex) => (
-          <div className="row" key={rowIndex}>
-            {columns.map((column, columnIndex) => (
-              <div
-                className="seat"
-                key={columnIndex}
-                onClick={() => {
-                  //FIXME: how would I know if the seat is already reserved or not?
-                }}
-              ></div>
-            ))}
-          </div>
-        ))}
+        <div className="grid__body">
+          {rows.map((row, rowIndex) => (
+            <div className="row" key={rowIndex}>
+              {columns.map((column, columnIndex) => (
+                <div
+                  className="seat"
+                  key={columnIndex}
+                  onClick={() => {
+                    //FIXME: how would I know if the seat is already reserved or not?
+                  }}
+                ></div>
+              ))}
+            </div>
+          ))}
+        </div>
         <button className="button">Confirm</button>
       </div>
     </div>

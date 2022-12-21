@@ -16,8 +16,9 @@ function Header() {
         </div>
         <div className="header__menuRight">
           <a href="/login">Login</a>
-          <a href="/register">Register</a>
+          <a href="/signup">Register</a>
           {/* TODO: add profile drop menu */}
+          <a href="/profile">Profile</a>          
         </div>
       </div>
     </div>

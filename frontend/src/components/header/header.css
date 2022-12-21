@@ -2,8 +2,14 @@
   background-color: #fff;
   height: 4rem;
   display: flex;
-  padding: 0 40px;
+  padding: 0 5vw;
   align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  z-index: 100;
 }
 .header__logo {
   height: 200px;
@@ -29,8 +35,8 @@
   margin-bottom: auto;
 }
 .header__menu {
+  width: 100%;
   display: flex;
-  flex: 1;
   align-items: center;
   justify-content: space-between;
   padding-right: 20px;
@@ -38,18 +44,17 @@
 }
 .header__menuLeft {
   display: flex;
-  flex: 1;
-  align-items: left;
-  justify-content: space-evenly;
-  padding-right: 60%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  /* padding-right: 60%; */
   /*text color*/
 }
 .header__menuRight {
   display: flex;
-  flex: 1;
-  align-items: right;
-  justify-content: space-evenly;
-  padding-right: 20px;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 a {
   color: #74052f;
