@@ -8,9 +8,9 @@ const mangercontroller = require('../controllers/match-controller')
 router.get('/matches', mangercontroller.getAllMatches)
 router.get('/matches/:id', mangercontroller.getMatch)
 
-router.patch('/manager/match/:id', mangercontroller.updateMatch)
-router.post('/manager/match', mangercontroller.createMatch)
-router.delete('/manager/match/:id', mangercontroller.deleteMatch)
+router.patch('/manager/match/:id', auth.verifyToken, mangercontroller.updateMatch)
+router.post('/manager/match', auth.verifyToken, mangercontroller.createMatch)
+router.delete('/manager/match/:id', auth.verifyToken, mangercontroller.deleteMatch)
 
 router.get('/teams', auth.verifyToken, mangercontroller.getTeams)
 
