@@ -8,57 +8,58 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import Tickets from "./../tickets/tickets";
-const matches = [
-  {
-    id: 1,
-    venue: "The Oval",
-    date: "2020-09-02",
-    time: "14:00",
-    team1: "Morraco",
-    team2: "Spain",
-    refree: "Yasser",
-    lineman1: "Magdy",
-    lineman2: "Saif",
-    tickets: 100,
-  },
-  {
-    id: 2,
-    venue: "Losail",
-    date: "2020-09-03",
-    time: "14:00",
-    team1: "Morraco",
-    team2: "Spain",
-    refree: "Yasser",
-    lineman1: "Magdy",
-    lineman2: "Saif",
-    tickets: 100,
-  },
-  {
-    id: 3,
-    venue: "ElBeit",
-    date: "2020-09-04",
-    time: "14:00",
-    team1: "Morraco",
-    team2: "Spain",
-    refree: "Hazem",
-    lineman1: "Magdy",
-    lineman2: "Saif",
-    tickets: 100,
-  },
-  {
-    id: 4,
-    venue: "The Oval",
-    date: "2020-09-02",
-    time: "14:00",
-    team1: "Morraco",
-    team2: "Spain",
-    refree: "Yasser",
-    lineman1: "Magdy",
-    lineman2: "Saif",
-    tickets: 100,
-  },
-];
+// import to fetch data from backend
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 function Matches() {
+  const [matches, setMatches] = useState([]);
+  useEffect(() => {
+    //FIXME: fix the cors error
+    // axios
+    //   .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     setMatches(res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+    fetch("https://qatar2022worldcupreservationsystem.onrender.com/matches", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        setMatches(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    setMatches([
+      {
+        id: 1,
+        firstTeam: "Egypt",
+        secondTeam: "Morocco",
+        stadium: "Al Rayyan Stadium",
+        date: "2021-12-12",
+        time: "12:00",
+      },
+      {
+        id: 2,
+        firstTeam: "Egypt",
+        secondTeam: "Morocco",
+        stadium: "Al Rayyan Stadium",
+        date: "2021-12-12",
+        time: "12:00",
+      },
+    ]);
+  }, []);
+
   return (
     <div className="matches">
       <Header />
@@ -77,18 +78,18 @@ function Matches() {
               <div className="teams">
                 <div className="team">
                   <img alt="team1" src={flag} className="team-flag" />
-                  <h2>{match.team1}</h2>
+                  <h2>{match.firstTeam}</h2>
                 </div>
                 <span>VS</span>
                 <div className="team">
                   <img alt="team2" src={flag} className="team-flag" />
-                  <h2>{match.team2}</h2>
+                  <h2>{match.secondTeam}</h2>
                 </div>
               </div>
               <div className="match_info">
                 <div className="info">
                   <FontAwesomeIcon icon={faCalendarAlt} />
-                  <h3>{match.venue}</h3>
+                  <h3>{match.stadium.name}</h3>
                 </div>
                 <div className="info">
                   <FontAwesomeIcon icon={faMapMarkerAlt} />
@@ -96,7 +97,8 @@ function Matches() {
                 </div>
                 <div className="info">
                   <FontAwesomeIcon icon={faClock} />
-                  <h3>{match.time}</h3>
+                  {/* FIXME: convert date to time */}
+                  <h3>{match.date}</h3>
                 </div>
               </div>
             </div>
