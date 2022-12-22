@@ -1,10 +1,10 @@
-.grid {
+.match {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
 }
-.grid__header {
+.match__header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -13,6 +13,53 @@
   gap: 10%;
 
   background-color: #74052f;
+  color: #fff;
+}
+.match__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.match__teams {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+.match__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 60%;
+  flex-wrap: wrap;
+}
+.match__info__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.grid__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 60%;
+  margin: 0 auto;
+  background-color: #f2c81e;
   color: #fff;
 }
 .row {
@@ -35,19 +82,18 @@
   line-height: 20px;
 }
 .seat.selected {
-  background: #f00;
+  background: #f2c81e;
   color: #fff;
 }
 .seat.occupied {
-  background: #ccc;
+  background: #645434;
   color: #fff;
-}
-.seat.available {
-  background: #eee;
-  color: #000;
 }
 .seat:hover {
   cursor: pointer;
+}
+.seat.occupied:hover {
+  cursor: not-allowed;
 }
 .button {
   background-color: #74052f;

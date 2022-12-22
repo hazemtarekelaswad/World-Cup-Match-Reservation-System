@@ -17,22 +17,8 @@ function Matches() {
   const [matches, setMatches] = useState([]);
   useEffect(() => {
     //FIXME: fix the cors error
-    // axios
-    //   .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setMatches(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    fetch("https://qatar2022worldcupreservationsystem.onrender.com/matches", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
+    axios
+      .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
       .then((res) => {
         console.log(res.data);
         setMatches(res.data);
@@ -40,24 +26,24 @@ function Matches() {
       .catch((err) => {
         console.log(err);
       });
-    setMatches([
-      {
-        id: 1,
-        firstTeam: "Egypt",
-        secondTeam: "Morocco",
-        stadium: "Al Rayyan Stadium",
-        date: "2021-12-12",
-        time: "12:00",
-      },
-      {
-        id: 2,
-        firstTeam: "Egypt",
-        secondTeam: "Morocco",
-        stadium: "Al Rayyan Stadium",
-        date: "2021-12-12",
-        time: "12:00",
-      },
-    ]);
+    //   setMatches([
+    //     {
+    //       id: 1,
+    //       firstTeam: "Egypt",
+    //       secondTeam: "Morocco",
+    //       stadium: "Al Rayyan Stadium",
+    //       date: "2021-12-12",
+    //       time: "12:00",
+    //     },
+    //     {
+    //       id: 2,
+    //       firstTeam: "Egypt",
+    //       secondTeam: "Morocco",
+    //       stadium: "Al Rayyan Stadium",
+    //       date: "2021-12-12",
+    //       time: "12:00",
+    //     },
+    //   ]);
   }, []);
 
   return (
@@ -72,7 +58,7 @@ function Matches() {
             <div
               className="matches_list__item"
               onClick={() => {
-                window.location.href = "/tickets/" + match.id;
+                window.location.href = "/tickets/" + match.matchId;
               }}
             >
               <div className="teams">
