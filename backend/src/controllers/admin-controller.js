@@ -1,6 +1,7 @@
 const userHelper = require('../helpers/user-helper')
 
 const { User } = require('../models/user-model')
+const { use } = require('../routes/match-route')
 
 const getpandeng = async (req, res) => {
 
@@ -21,7 +22,29 @@ const deleteuser = async (req, res) => {
     res.status(200).send({users});
 }
 
+const getAllUsers = async (req, res) => {
+    const users = await User.find()
+    usersToSend = users.map((user) => {
+        return {
+            userId: user._id,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            birthDate: user.birthDate,
+            gender: user.gender,
+            nationality: user.nationality,
+            email: user.email,
+            role: user.role,
+            status: user.status,
+            matches: user.matches
+        }
+    })
+    res.status(200).send(usersToSend)
+}
+
 module.exports = { 
     getpandeng,
-    approve,deleteuser
+    approve,
+    deleteuser,
+    getAllUsers
 }

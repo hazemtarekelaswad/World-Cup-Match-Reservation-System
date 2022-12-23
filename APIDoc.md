@@ -526,3 +526,41 @@ status: `200`
 </details>
 
 ---
+
+<!-- Section -->
+## Admins
+<!-- Endpoint -->
+<details><summary><h3>Get users</h3></summary>
+
+**`GET`** | `/admin/users`
+
+**Response**
+
+status: `200`
+```json
+[
+    {
+        "userId": "string",
+        "username": "string",
+        "firstName": "string",
+        "lastName": "string",
+        "birthDate": "date",
+        "gender": "M" | "F",
+        "nationality": "string",
+        "email": "string",
+        "role": "fan" | "manager",
+        "status": "approved" | "pending",
+        "matches": [
+            {
+                "matchId": "string",
+                "seatRow": "number",
+                "seatColumn": "number",
+                "_id": "string"
+            }
+        ]
+    }
+]
+```
+</details>
+
+---
