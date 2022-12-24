@@ -3,6 +3,8 @@ import Login from "./login/login.js";
 import Matches from "./matches/matches";
 import Home from "./home/home";
 import Tickets from "./tickets/tickets";
+import Teams from "./teams/teams";
+import Stadiums from "./stadiums/stadiums";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path="/signup" element={<Login />} />
           {/* TODO: change this to include the match id */}
           <Route path="/tickets/:id" element={<Tickets />} />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/stadiums" element={<Stadiums />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -32,29 +32,31 @@
   display: flex;
   flex: 1;
   align-items: center;
-  justify-content: space-between;
-  padding-right: 20px;
-  font-size: 20px;
+  justify-content: space-evenly;
 }
 .header__menuLeft {
   display: flex;
   flex: 1;
   align-items: left;
-  justify-content: space-evenly;
-  padding-right: 60%;
-  /*text color*/
+  justify-content: flex-start;
+  gap: 20px;
 }
 .header__menuRight {
   display: flex;
   flex: 1;
   align-items: right;
-  justify-content: space-evenly;
-  padding-right: 20px;
+  justify-content: flex-end;
+  gap: 20px;
 }
 a {
   color: #74052f;
   text-decoration: wavy;
   font-weight: bold;
   font-size: 20px;
-  /*text color*/
+}
+.header__menuRight a {
+  text-decoration: underline;
+}
+.header__menuLeft a {
+  text-decoration: underline;
 }

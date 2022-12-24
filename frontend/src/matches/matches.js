@@ -11,10 +11,20 @@ import Tickets from "./../tickets/tickets";
 // import to fetch data from backend
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 function Matches() {
   const [matches, setMatches] = useState([]);
+  function gettime(time) {
+    var date = new Date(time);
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    var strTime = hours + ":" + minutes + " " + ampm;
+    return strTime;
+  }
   useEffect(() => {
     //FIXME: fix the cors error
     axios
@@ -74,7 +84,7 @@ function Matches() {
               </div>
               <div className="match_info">
                 <div className="info">
-                  <FontAwesomeIcon icon={faCalendarAlt} />
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
                   <h3>{match.stadium.name}</h3>
                 </div>
                 <div className="info">
@@ -84,7 +94,7 @@ function Matches() {
                 <div className="info">
                   <FontAwesomeIcon icon={faClock} />
                   {/* FIXME: convert date to time */}
-                  <h3>{match.date}</h3>
+                  <h3>{gettime(match.time)}</h3>
                 </div>
               </div>
             </div>
