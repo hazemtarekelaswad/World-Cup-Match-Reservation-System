@@ -11,6 +11,8 @@ function Header() {
         <div className="header__menuLeft">
           <a href="/">Home</a>
           <a href="/matches">Matches</a>
+          <a href="/teams">Teams</a>
+          <a href="/stadiums">Stadiums</a>
           {/* TODO: find a way to add tickets list or remove it */}
           {/* <a href="/tickets">Tickets</a> */}
         </div>
@@ -18,7 +20,7 @@ function Header() {
           <a href="/login">Login</a>
           <a href="/signup">Register</a>
           {/* TODO: add profile drop menu */}
-          <a href="/profile">Profile</a>          
+          <a href="/profile">Profile</a>
         </div>
       </div>
     </div>

@@ -13,65 +13,48 @@ import { useState, useEffect } from "react";
 // import axios from "axios";
 // import { Link } from "react-router-dom";
 import CartContainer from "../cart/cartContainer";
+import axios from "axios";
 
 function Matches() {
-
   const [cartopened, setcartOpened] = useState(false);
   const [matches, setMatches] = useState([]);
-  
-  
-  
+
   useEffect(() => {
     //FIXME: fix the cors error
-    // axios
-    //   .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     setMatches(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    fetch("https://qatar2022worldcupreservationsystem.onrender.com/matches", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
+    axios
+      .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
       .then((res) => {
-        console.log(res.data);
         setMatches(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    setMatches([
-      {
-        id: 0,
-        firstTeam: "Egypt",
-        secondTeam: "Morocco",
-        stadium: "Al Rayyan Stadium",
-        date: "2021-12-12",
-        time: "12:00",
-      },
-      {
-        id: 1,
-        firstTeam: "Egypt",
-        secondTeam: "Morocco",
-        stadium: "Al Rayyan Stadium",
-        date: "2021-12-12",
-        time: "12:00",
-      },
-      {
-        id: 2,
-        firstTeam: "Egypt",
-        secondTeam: "Morocco",
-        stadium: "Al Rayyan Stadium",
-        date: "2021-12-12",
-        time: "12:00",
-      },
-    ]);
+    // setMatches([
+    //   {
+    //     id: 0,
+    //     firstTeam: "Egypt",
+    //     secondTeam: "Morocco",
+    //     stadium: "Al Rayyan Stadium",
+    //     date: "2021-12-12",
+    //     time: "12:00",
+    //   },
+    //   {
+    //     id: 1,
+    //     firstTeam: "Egypt",
+    //     secondTeam: "Morocco",
+    //     stadium: "Al Rayyan Stadium",
+    //     date: "2021-12-12",
+    //     time: "12:00",
+    //   },
+    //   {
+    //     id: 2,
+    //     firstTeam: "Egypt",
+    //     secondTeam: "Morocco",
+    //     stadium: "Al Rayyan Stadium",
+    //     date: "2021-12-12",
+    //     time: "12:00",
+    //   },
+    // ]);
   }, []);
 
   return (
@@ -83,12 +66,16 @@ function Matches() {
         </div>
 
         <div className="matches__content">
-          <CartContainer cartopened={cartopened} setcartOpened={setcartOpened}/>
+          <CartContainer
+            cartopened={cartopened}
+            setcartOpened={setcartOpened}
+          />
 
           <div className="matches_list">
-            {matches.map((match) => (
+            {matches.map((match, index) => (
               <div
                 className="matches_list__item"
+                key={index}
                 onClick={() => {
                   window.location.href = "/tickets/" + match.id;
                 }}
