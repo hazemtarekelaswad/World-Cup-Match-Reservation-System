@@ -77,7 +77,7 @@ function Matches() {
                 className="matches_list__item"
                 key={index}
                 onClick={() => {
-                  window.location.href = "/tickets/" + match.id;
+                  window.location.href = "/tickets/" + match.matchId;
                 }}
               >
                 <div className="teams">
