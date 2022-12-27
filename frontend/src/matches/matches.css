@@ -20,10 +20,9 @@
   position: fixed;
   top: 64px;
   left: 0;
-  
 }
 
-.matches__content{
+.matches__content {
   width: 60%;
   margin: 0 0 50px 0;
 }
@@ -102,4 +101,114 @@
   color: #dcc4ae;
   /*pointer */
   cursor: pointer;
+}
+
+.new_match {
+  position: fixed;
+  /*centered*/
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /*background*/
+  background-color: #dcc4ae;
+  width: 70%;
+  height: 70%;
+  margin: 20px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 1px #dcc4ae;
+  display: block;
+}
+.new_match__container__header {
+  /*top center*/
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  /*background*/
+  background-color: #74052f;
+  width: 100%;
+  height: 10%;
+}
+.new_match__container__header h1 {
+  /*centered*/
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 1.5rem;
+  text-align: center;
+}
+.close {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  margin: 10px;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.new_match__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #dcc4ae;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  color: #645434;
+}
+
+.new_match__container__content__info {
+  /*grid*/
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "team1 team2"
+    "team1 team2";
+  grid-gap: 20px;
+  width: 100%;
+  height: 100%;
+  margin: 20px 0;
+  margin-top: 100px;
+}
+.new_match__container__content__info button {
+  width: 25%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #74052f;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  position: fixed;
+  top: 850%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.input_info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.stadium_image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
