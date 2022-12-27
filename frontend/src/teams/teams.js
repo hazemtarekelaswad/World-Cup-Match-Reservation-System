@@ -6,19 +6,18 @@ import axios from "axios";
 import getFlag from "../getFlag";
 
 function Teams() {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role"); // fan, admin, manager
   const [teams, setTeams] = useState([]);
   const [userType, setUserType] = useState("fan"); // fan , manager , admin (get it from token)
   const [flags, setFlags] = useState([]);
-  // TODO: get token in another way
-  //TODO: all users can see the teams
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzllMmY0YjdmNDE1Y2ViYzkwMDI1OWMiLCJ1c2VybmFtZSI6ImFobWVkeWFzc2VyIiwiZW1haWwiOiJ5YXNzZXJAZ21haWwuY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpYXQiOjE2NzE0ODkyMjl9.a50elPCVT6kF9EGbovyOXFDmK8uwLIWvTNGEhWoq6D8";
+
   useEffect(() => {
     // use the token to get the teams
     axios
       .get("https://qatar2022worldcupreservationsystem.onrender.com/teams", {
         headers: {
-          Token: token,
+          Token: token, //FIXME: why only manager can see the teams?
         },
       })
       .then((res) => {

@@ -11,14 +11,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function Matches() {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzllMmY0YjdmNDE1Y2ViYzkwMDI1OWMiLCJ1c2VybmFtZSI6ImFobWVkeWFzc2VyIiwiZW1haWwiOiJ5YXNzZXJAZ21haWwuY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpYXQiOjE2NzE0ODkyMjl9.a50elPCVT6kF9EGbovyOXFDmK8uwLIWvTNGEhWoq6D8";
-
+  const token = localStorage.getItem("token");
+  const userType = localStorage.getItem("role");
   const [matches, setMatches] = useState([]);
   const [teams, setTeams] = useState(["Algeria", "Argentina"]);
   const [stadiums, setStadiums] = useState([]); // TODO: get stadiums from the backend
 
-  const [userType, setUserType] = useState("manager"); // fan , manager , admin (get it from token)
   const [newMatch, setNewMatch] = useState(false);
   const [match, setMatch] = useState({
     firstTeam: "",

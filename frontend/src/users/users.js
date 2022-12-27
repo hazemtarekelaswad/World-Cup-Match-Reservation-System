@@ -1,19 +1,20 @@
 import React from "react";
 import Header from "./../components/header/header";
-import "./stadiums.css";
-function Stadiums() {
+import "./users.css";
+
+function Users() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // fan, admin, manager
   return (
-    <div className="stadiums">
+    <div className="users">
       <Header />
-      <div className="stadiums__container">
-        <div className="stadiums__header">
-          <h1>Stadiums</h1>
+      <div className="users__container">
+        <div className="users__header">
+          <h1>Users</h1>
         </div>
       </div>
     </div>
   );
 }
 
-export default Stadiums;
+export default Users;

@@ -7,7 +7,10 @@ import Profile from "./profile/profile";
 import Teams from "./teams/teams";
 import Stadiums from "./stadiums/stadiums";
 import Reservations from "./reservations/reservations";
+import Users from "./users/users";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_TOKEN } from "./store/actions/index";
 
 function App() {
   return (
@@ -23,6 +26,7 @@ function App() {
         <Route path="/teams" element={<Teams />} />
         <Route path="/stadiums" element={<Stadiums />} />
         <Route path="/reservations" element={<Reservations />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </BrowserRouter>
   );

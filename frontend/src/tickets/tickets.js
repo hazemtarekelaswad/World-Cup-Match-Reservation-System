@@ -12,40 +12,10 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 // linemen
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-//TODO:
-// 1- get the match id from the url
-// 2- get the match data from the backend
-// 3- display the match data
-// 4- display the tickets data (grid of seats)
-// 5- add the ticket by clicking on the seat
-// 6- remove the ticket by clicking on the seat
-// 7- confirm the tickets
-// 8- update the tickets data in the backend
-// 9- update the user cart in the backend
-// const match = {
-//   firstTeam: "ahly",
-//   secondTeam: "ahly",
-//   stadium: { name: "ay 7aga", columnsCount: 10, rowsCount: 15 },
-//   date: "2022-12-20T00:00:00.000Z",
-//   referee: "ali gom3a",
-//   firstLineman: "ma7mod",
-//   secondLineman: "ma7mod gom3a",
-//   fans: [
-//     {
-//       fanId: "6398a97d737c37fab7d8d80f",
-//       seatRow: 10,
-//       seatColumn: 5,
-//       _id: "639e595a480f08f5c23f88fb",
-//     },
-//     {
-//       fanId: "639e2f4b7f415cebc900259c",
-//       seatRow: 10,
-//       seatColumn: 15,
-//       _id: "639e5bb8f8bc3bcd06a76b73",
-//     },
-//   ],
-// };
+
 function Tickets({ matchID }) {
+  const token = localStorage.getItem("token");
+  const userType = localStorage.getItem("role");
   //FIXME: add an id to the match and use it to get the match data
   const match_id = useParams().id;
   const [match, setMatch] = useState({});

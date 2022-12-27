@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Reservations() {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role"); // fan, admin, manager
+
   const [reservations, setReservations] = useState([
     {
       _id: "0",

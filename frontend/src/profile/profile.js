@@ -10,6 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role"); // fan, admin, manager
+
   const [dateValue, onDateChange] = useState(new Date());
   const [profile, setProfile] = useState({
     email: "sadf@gmail.com",

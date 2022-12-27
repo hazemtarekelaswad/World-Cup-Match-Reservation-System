@@ -1,4 +1,4 @@
-.stadiums__container {
+.users__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,7 +7,7 @@
   width: 100%;
   background-color: #fff;
 }
-.stadiums__header {
+.users__header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +16,6 @@
   width: 100%;
   background-color: #74052f;
   color: #fff;
-
   position: fixed;
   top: 64px;
   left: 0;

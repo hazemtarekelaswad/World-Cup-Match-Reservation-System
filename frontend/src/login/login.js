@@ -15,10 +15,28 @@ import tamema from "../imges/toy.png";
 import Header from "../components/header/header";
 import moment from "moment";
 import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { SET_TOKEN } from "../store/actions";
 
 function Login({ signupParam }) {
   const [signup, setSignup] = useState(signupParam);
   const [dateValue, onDateChange] = useState(new Date());
+  const getRole = (token) => {
+    axios
+      .get("https://qatar2022worldcupreservationsystem.onrender.com/users/me", {
+        headers: {
+          Token: token,
+        },
+      })
+      .then((res) => {
+        console.log("role_login: " + res.data.role);
+        localStorage.setItem("role", res.data.role);
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const [user, setUser] = useState({
     username: "",
@@ -77,7 +95,8 @@ function Login({ signupParam }) {
         }
       )
       .then((res) => {
-        setToken(res.data.token);
+        localStorage.setItem("token", res.data.token);
+        getRole(res.data.token);
       })
       .catch((err) => {
         console.log(err);
