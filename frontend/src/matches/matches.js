@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./../components/header/header";
 import "./matches.css";
-import flag from "./../imges/egypt.png";
+import getFlag from "../getFlag";
 //time form font awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
@@ -18,7 +18,7 @@ import axios from "axios";
 function Matches() {
   const [cartopened, setcartOpened] = useState(false);
   const [matches, setMatches] = useState([]);
-
+  const [userType, setUserType] = useState("fan"); // fan , manager , admin (get it from token)
   useEffect(() => {
     //FIXME: fix the cors error
     axios
@@ -29,32 +29,6 @@ function Matches() {
       .catch((err) => {
         console.log(err);
       });
-    // setMatches([
-    //   {
-    //     id: 0,
-    //     firstTeam: "Egypt",
-    //     secondTeam: "Morocco",
-    //     stadium: "Al Rayyan Stadium",
-    //     date: "2021-12-12",
-    //     time: "12:00",
-    //   },
-    //   {
-    //     id: 1,
-    //     firstTeam: "Egypt",
-    //     secondTeam: "Morocco",
-    //     stadium: "Al Rayyan Stadium",
-    //     date: "2021-12-12",
-    //     time: "12:00",
-    //   },
-    //   {
-    //     id: 2,
-    //     firstTeam: "Egypt",
-    //     secondTeam: "Morocco",
-    //     stadium: "Al Rayyan Stadium",
-    //     date: "2021-12-12",
-    //     time: "12:00",
-    //   },
-    // ]);
   }, []);
 
   return (
@@ -82,12 +56,20 @@ function Matches() {
               >
                 <div className="teams">
                   <div className="team">
-                    <img alt="team1" src={flag} className="team-flag" />
+                    <img
+                      alt="team1"
+                      src={getFlag(match.firstTeam)}
+                      className="team-flag"
+                    />
                     <h2>{match.firstTeam}</h2>
                   </div>
                   <span>VS</span>
                   <div className="team">
-                    <img alt="team2" src={flag} className="team-flag" />
+                    <img
+                      alt="team2"
+                      src={getFlag(match.secondTeam)}
+                      className="team-flag"
+                    />
                     <h2>{match.secondTeam}</h2>
                   </div>
                 </div>
