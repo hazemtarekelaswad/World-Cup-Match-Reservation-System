@@ -1,10 +1,10 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "./header.css";
 import logo from "./../../imges/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
-
+// import { UserContext } from "./../../context";
 /*cart*/
 
 function Header() {

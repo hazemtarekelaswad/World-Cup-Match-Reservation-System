@@ -1,6 +1,6 @@
 import React from "react";
 
-function Stadiums() {
+function Stadiums({ token, setToken }) {
   return <div>stadiums</div>;
 }
 

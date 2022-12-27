@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.0"
   }
 }

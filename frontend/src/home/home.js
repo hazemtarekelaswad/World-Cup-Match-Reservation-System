@@ -1,11 +1,10 @@
-import React from "react";
-// import bg from "./../imges/bg.jpg";
+import { useState, useEffect } from "react";
 import bg from "./../imges/t.png";
 import toy from "./../imges/toy.png";
 import "./home.css";
 import Header from "./../components/header/header";
-// import Footer from "./../components/footer/footer";
-function Home() {
+
+function Home({ token, setToken }) {
   return (
     <div className="home">
       <div className="home_container">

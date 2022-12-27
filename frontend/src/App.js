@@ -7,36 +7,55 @@ import Profile from "./profile/profile";
 import Teams from "./teams/teams";
 import Stadiums from "./stadiums/stadiums";
 import Reservations from "./reservations/reservations";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { UserContext } from "./context";
-import { useContext, useState } from 'react';
 
 function App() {
   const [token, setToken] = useState("");
-
-
-  //routes are defined here
+  console.log("token App", token);
   return (
-    <div className="App">
-      <UserContext.Provider value={{token, setToken}}>
-        <BrowserRouter>
-          <Routes>
-
-            <Route path="/" element={<Home />} />  
-            <Route path="/matches" element={<Matches />} />
-            <Route path="/login" element={<Login signupParam={false} />} />
-            <Route path="/signup" element={<Login signupParam={true} />} />
-            <Route path="/profile" element={<Profile />} />
-            {/* TODO: change this to include the match id */}
-            <Route path="/tickets/:id" element={<Tickets />} />
-            <Route path="/teams" element={<Teams />} />
-            <Route path="/stadiums" element={<Stadiums />} />
-            <Route path="/reservations" element={<Reservations />} />
-
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home token={token} setToken={setToken} />} />
+        <Route
+          path="/matches"
+          element={<Matches token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/login"
+          element={
+            <Login token={token} setToken={setToken} signupParam={false} />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Login token={token} setToken={setToken} signupParam={true} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={<Profile token={token} setToken={setToken} />}
+        />
+        {/* TODO: change this to include the match id */}
+        <Route
+          path="/tickets/:id"
+          element={<Tickets token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/teams"
+          element={<Teams token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/stadiums"
+          element={<Stadiums token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/reservations"
+          element={<Reservations token={token} setToken={setToken} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

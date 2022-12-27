@@ -1,7 +1,7 @@
 import "./profile.css";
 import Header from "../components/header/header";
 import "../components/header/header.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import tamema from "../imges/toy.png";
 import DatePicker from "react-date-picker";
 import Dropdown from "react-dropdown";
@@ -9,9 +9,8 @@ import Dropdown from "react-dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-function Profile() {
+function Profile({ token, setToken }) {
   const [dateValue, onDateChange] = useState(new Date());
-
   const [profile, setProfile] = useState({
     email: "sadf@gmail.com",
     username: "yehuda",
