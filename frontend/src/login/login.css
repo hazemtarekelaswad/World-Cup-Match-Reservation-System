@@ -7,10 +7,10 @@
 
 .login-wrapper{
     width: 40%;
-    height: 100%;
+    height: 90%;
     margin: auto auto;
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
     position: relative;
 }
@@ -23,10 +23,11 @@
     width: 100%;
     height: fit-content;
     
+    
 }
 
 .signup-style{
-    top: -50px;
+    top: -40px;
     position: absolute;
 }
 
@@ -142,9 +143,8 @@
     align-items: center;
 }
 
-.button-container{
+.footer .button-container{
     margin-bottom: 10px;
-    margin-top: 0;
     background-color: #3bceff;
     width: 100px;
     height: 40px;
@@ -157,7 +157,7 @@
     align-items: center;
 
 }
-.button-container button{
+.footer .button-container button{
     width: 100%;
     height: 100%;
     border-radius: 5px;
@@ -169,7 +169,7 @@
     cursor: pointer;
 }
 
-.button-container button:active{
+.footer .button-container button:active{
     transform: translateY(4px);
 }
 
