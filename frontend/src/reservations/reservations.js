@@ -4,7 +4,7 @@ import "./reservations.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-function Reservations({ token, setToken }) {
+function Reservations() {
   const [reservations, setReservations] = useState([
     {
       _id: "0",

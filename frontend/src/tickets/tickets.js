@@ -45,7 +45,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 //     },
 //   ],
 // };
-function Tickets({ matchID, token, setToken }) {
+function Tickets({ matchID }) {
   //FIXME: add an id to the match and use it to get the match data
   const match_id = useParams().id;
   const [match, setMatch] = useState({});

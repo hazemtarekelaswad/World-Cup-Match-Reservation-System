@@ -9,7 +9,7 @@ import Dropdown from "react-dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-function Profile({ token, setToken }) {
+function Profile() {
   const [dateValue, onDateChange] = useState(new Date());
   const [profile, setProfile] = useState({
     email: "sadf@gmail.com",

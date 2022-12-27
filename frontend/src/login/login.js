@@ -16,7 +16,7 @@ import Header from "../components/header/header";
 import moment from "moment";
 import axios from "axios";
 
-function Login({ signupParam, token, setToken }) {
+function Login({ signupParam }) {
   const [signup, setSignup] = useState(signupParam);
   const [dateValue, onDateChange] = useState(new Date());
 

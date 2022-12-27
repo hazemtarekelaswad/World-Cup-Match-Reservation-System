@@ -4,7 +4,7 @@ import toy from "./../imges/toy.png";
 import "./home.css";
 import Header from "./../components/header/header";
 
-function Home({ token, setToken }) {
+function Home() {
   return (
     <div className="home">
       <div className="home_container">
