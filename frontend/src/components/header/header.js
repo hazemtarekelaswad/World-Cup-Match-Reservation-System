@@ -1,6 +1,12 @@
 import React from "react";
 import "./header.css";
 import logo from "./../../imges/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
+
+/*cart*/
+
 function Header() {
   return (
     <div className="header">
@@ -19,8 +25,10 @@ function Header() {
         <div className="header__menuRight">
           <a href="/login">Login</a>
           <a href="/signup">Register</a>
-          {/* TODO: add profile drop menu */}
-          <a href="/profile">Profile</a>
+          <a href="/profile">Profile</a>.{/* cart */}
+          <a href="/reservations">
+            <FontAwesomeIcon className="cart-icon" icon={faCartShopping} />
+          </a>
         </div>
       </div>
     </div>

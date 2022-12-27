@@ -8,14 +8,12 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import CartContainer from "../cart/cartContainer";
 import axios from "axios";
 
 function Matches() {
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzllMmY0YjdmNDE1Y2ViYzkwMDI1OWMiLCJ1c2VybmFtZSI6ImFobWVkeWFzc2VyIiwiZW1haWwiOiJ5YXNzZXJAZ21haWwuY29tIiwicm9sZSI6Im1hbmFnZXIiLCJpYXQiOjE2NzE0ODkyMjl9.a50elPCVT6kF9EGbovyOXFDmK8uwLIWvTNGEhWoq6D8";
 
-  const [cartopened, setcartOpened] = useState(false);
   const [matches, setMatches] = useState([]);
   const [teams, setTeams] = useState(["Algeria", "Argentina"]);
   const [stadiums, setStadiums] = useState([]); // TODO: get stadiums from the backend
@@ -67,17 +65,9 @@ function Matches() {
       <Header />
       <div className="matches__container">
         <div className="matches__container__header">
-          <h1>{cartopened ? "Cart" : "Matches"}</h1>
+          <h1>Matches</h1>
         </div>
-
         <div className="matches__content">
-          {userType === "fan" && (
-            <CartContainer
-              cartopened={cartopened}
-              setcartOpened={setcartOpened}
-            />
-          )}
-
           <div className="matches_list">
             {matches.map((match, index) => (
               <div
