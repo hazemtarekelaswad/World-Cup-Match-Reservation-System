@@ -255,6 +255,58 @@ const reserveSeat = async (req, res) => {
     })
 }
 
+const getReservations = async (req, res) => {
+    // validate the role of fan in order to reserve the seat
+    if (req.authUser.role != "fan") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a fan"
+    })
+
+    const user = await User.findOne({ _id: req.authUser._id })
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    let matchesToSend = []
+    let hashSet = {}
+    for (let reservedMatch of user.matches) {
+        const matchDetails = await Match.findById(reservedMatch.matchId)
+        if (matchDetails._id.toString() in hashSet) continue;
+        hashSet[matchDetails._id.toString()] = 0
+        const stadium = await Stadium.findById(matchDetails.stadium)
+        
+        let matchToSend = {
+            matchId: matchDetails._id,
+            firstTeam: matchDetails.firstTeam,
+            secondTeam: matchDetails.secondTeam,
+            stadium: {
+                name: stadium.name,
+                columnsCount: stadium.columnsCount,
+                rowsCount: stadium.rowsCount
+            },
+            date: matchDetails.date,
+            referee: matchDetails.referee,
+            firstLineman: matchDetails.firstLineman,
+            secondLineman: matchDetails.secondLineman,
+        }
+
+        let seats = []
+        for (let fan of matchDetails.fans) {
+            if (fan.fanId.equals(req.authUser._id)) {
+                seats.push({
+                    seatRow: fan.seatRow,
+                    seatColumn: fan.seatColumn
+                })
+            }
+        }
+        matchToSend["seats"] = seats
+        matchesToSend.push(matchToSend)
+    }
+
+    res.status(200).send({ "reservations": matchesToSend })
+}
+
 const cancelSeat = async (req, res) => {
     // validate the role of fan in order to reserve the seat
     if (req.authUser.role != "fan") return res.status(403).send({
@@ -342,12 +394,16 @@ const getTeams = async (req, res) => {
     res.status(200).send({"teams": teamsToSend})
 }
 
+
+
 module.exports = { 
     signup,
     signin,
     getUser,
     updateUser,
     reserveSeat,
+    getReservations,
     cancelSeat,
     getTeams
 }
+
