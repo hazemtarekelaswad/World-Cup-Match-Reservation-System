@@ -8,22 +8,27 @@ import Dropdown from "react-dropdown";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function Profile() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // fan, admin, manager
-
   const [dateValue, onDateChange] = useState(new Date());
-  const [profile, setProfile] = useState({
-    email: "sadf@gmail.com",
-    username: "yehuda",
-    firstname: "Yehuda",
-    lastname: "Katz",
-    birthdate: "1990-01-01",
-    nationality: "USA",
-    gender: "F",
-    password: "123456",
-  });
+  const [profile, setProfile] = useState({});
+  useEffect(() => {
+    axios
+      .get("https://qatar2022worldcupreservationsystem.onrender.com/users/me", {
+        headers: {
+          token: token,
+        },
+      })
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [fname, setFname] = useState(true);
   const [lname, setLname] = useState(true);
@@ -31,6 +36,35 @@ function Profile() {
   const [birthDate, setBirthDate] = useState(true);
   const [nationality, setNationality] = useState(true);
   const [password, setPassword] = useState(true);
+
+  const saveProfile = () => {
+    // update using axios and token
+    axios
+      .put(
+        "https://qatar2022worldcupreservationsystem.onrender.com/users/me",
+        {
+          firstName: "Ahmed", // FIXME: you should update the value from the input field
+          lastName: "Yasser", // FIXME: you should update the value from the input field
+          birthDate: "1999-09-20", // FIXME: you should update the value from the input field
+          gender: "M", // FIXME: you should update the value from the input field (M or F)
+          role: "fan",
+          nationality: "Egyptian", //FIXME: you should update the value from the input field
+          // FIXME: add password
+        },
+        {
+          headers: {
+            token: token,
+          },
+        }
+      )
+
+      .then((res) => {
+        setProfile(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div className="profile">
@@ -66,7 +100,7 @@ function Profile() {
                     name="firstname"
                     id="firstname"
                     placeholder="First name"
-                    defaultValue={profile.firstname}
+                    defaultValue={profile.firstName}
                     disabled={fname}
                   />
                 </div>
@@ -87,7 +121,7 @@ function Profile() {
                     name="lastname"
                     id="lastname"
                     placeholder="Last name"
-                    defaultValue={profile.lastname}
+                    defaultValue={profile.lastName}
                     disabled={lname}
                   />
                 </div>
@@ -216,18 +250,16 @@ function Profile() {
               </div>
             )}
 
-            <div className="button-container">
+            <div className="button-container" onClick={saveProfile}>
               <button> Save </button>
             </div>
           </div>
 
-          <div className="profile-img-container">
-            {/* FIXME: fix image size when window size is small */}
+          {/* <div className="profile-img-container">
             <div className="profile-img">
-              <img className="profile-icon-img" src={tamema} alt="tamema" />
-              {/* <FontAwesomeIcon className='icon-img' icon={faUser} /> */}
+               <img className="profile-icon-img" src={tamema} alt="tamema" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
@@ -235,69 +267,3 @@ function Profile() {
 }
 
 export default Profile;
-
-// <div className='login-wrapper'>
-//                     <div className={'login-container signup-style'}>
-//                         <div className='img-container'>
-//                             <div className='img'>
-//                                 <img className='icon-img' src={tamema} alt='tamema' />
-//                                 {/* <FontAwesomeIcon className='icon-img' icon={faUser} /> */}
-//                             </div>
-//                         </div>
-//                         <div className='form-container'>
-//                             <div className='inputs-container'>
-//                                 <div className='form-wrapper'>
-//                                     <div className='Name-container'>
-//                                         <div className='first-name'>
-//                                             <input type='text' name='firstname' id='firstname' placeholder='First name' />
-//                                         </div>
-//                                         <div className='last-name'>
-//                                             <input type='text' name='lastname' id='lastname' placeholder='Last name' />
-//                                         </div>
-//                                     </div>
-
-//                                     <div className='birth-date-container'>
-//                                         <div className='label'>Birth date: </div>
-//                                         <DatePicker className="DatePicker" onChange={onDateChange} value={dateValue} />
-//                                     </div>
-
-//                                     {/* <div className='role'>
-//                                         <Dropdown className="Dropdown" options={options} value={''} placeholder="Select your role" />
-//                                     </div> */}
-
-//                                     <div className='nationality-container'>
-//                                         <div className='icon'>
-//                                             <FontAwesomeIcon className='icon-item' icon={faEarthAfrica} />
-//                                         </div>
-//                                         <div className='input'>
-//                                             <input type='text' name='nationality' id='nationality' placeholder='nationality' />
-//                                         </div>
-//                                     </div>
-
-//                                     <div className='gender-container'>
-//                                         <div className='icon'>
-//                                             <FontAwesomeIcon className='icon-item' icon={faVenusMars} />
-//                                         </div>
-//                                         <div className='gender'>
-//                                             <Dropdown className="Dropdown" options={['M', 'F']} value={''} placeholder="Select your gender" />
-//                                         </div>
-//                                     </div>
-
-//                                     <div className='password-container'>
-//                                         <div className='icon'>
-//                                             <FontAwesomeIcon className='icon-item' icon={faUnlockKeyhole} />
-//                                         </div>
-//                                         <div className='input'>
-//                                             <input type='password' name='password' id='password' placeholder='password' />
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             <div className='footer'>
-//                                 <div className='button-container'>
-//                                     <button>Save</button>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </d
