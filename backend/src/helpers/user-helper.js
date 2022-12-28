@@ -42,10 +42,10 @@ const validateUserUpdate = (userData) => {
     const schema = Joi.object({
         firstName: Joi.string().trim().min(1).max(100),
         lastName: Joi.string().trim().min(1).max(100),
+        password: Joi.string().min(8).max(50),
         birthDate: Joi.date(),
         gender: Joi.string().trim().uppercase().valid('M', 'F'),
         nationality: Joi.string().trim().min(1).max(100),
-        role: Joi.string().trim().lowercase().valid('fan', 'manager', 'admin'),
     })
     return schema.validate(userData)
 }

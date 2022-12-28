@@ -123,6 +123,8 @@ const updateUser = async (req, res) => {
     })
 
     // Update the user
+    if ("password" in req.body) req.body.password = await userHelper.hashPassword(req.body.password)
+
     const user = await User.findOneAndUpdate({ _id: req.authUser._id }, { $set: req.body })
     if (!user) return res.status(400).send({
         "status": "failure",
