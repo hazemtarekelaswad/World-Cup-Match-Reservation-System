@@ -41,13 +41,13 @@ function Login({ signupParam }) {
   const [user, setUser] = useState({
     username: "",
     password: "",
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     birthDate: "",
     gender: "",
     nationality: "",
     email: "",
-    role: "",
+    role: "fan",
   });
 
   function setUserOnChange(event) {
@@ -58,8 +58,16 @@ function Login({ signupParam }) {
     setUser({ ...user, ["gender"]: event.value == "Male" ? "M" : "F" });
   }
 
+  function setRoleOnChange(event) {
+    console.log(event);
+    setUser({ ...user, ["role"]: event.target.checked ? "manager" : "fan" });
+  }
+
   function signupOnClick() {
-    setUser({ ...user, ["birthDate"]: moment(dateValue).format("YYYY-MM-DD") });
+    setUser({
+      ...user,
+      ["birthDate"]: moment(dateValue).format("yyyy-MM-DD"),
+    });
     console.log(user);
     axios
       .post(
@@ -67,9 +75,9 @@ function Login({ signupParam }) {
         {
           username: user.username,
           password: user.password,
-          firstName: user.firstname,
-          lastName: user.lastname,
-          birthDate: user.birthDate,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          birthDate: moment(dateValue).format("yyyy-MM-DD"),
           gender: user.gender,
           nationality: user.nationality,
           email: user.email,
@@ -127,7 +135,7 @@ function Login({ signupParam }) {
                     <div className="first-name">
                       <input
                         type="text"
-                        name="firstname"
+                        name="firstName"
                         id="firstname"
                         placeholder="First name"
                         onChange={(e) => setUserOnChange(e)}
@@ -136,7 +144,7 @@ function Login({ signupParam }) {
                     <div className="last-name">
                       <input
                         type="text"
-                        name="lastname"
+                        name="lastName"
                         id="lastname"
                         placeholder="Last name"
                         onChange={(e) => setUserOnChange(e)}
@@ -253,14 +261,12 @@ function Login({ signupParam }) {
                 {signup && (
                   <div className="choose-role">
                     <div className="choose-role-container">
-                      <div className="label">Sign Up as admin </div>
+                      <div className="label">Sign Up as manager </div>
                       <input
                         type="checkbox"
                         name="role"
                         id="role"
-                        onChange={(e) =>
-                          setUserOnChange(e.target.value ? "manager" : "fan")
-                        }
+                        onChange={setRoleOnChange}
                       />
                     </div>
                   </div>

@@ -50,6 +50,25 @@
   padding: 10px;
   color: #645434;
 }
+.matches_list__item__add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 94%;
+  background-color: #dcc4ae;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-right: 40px;
+  padding: 10px;
+  color: #645434;
+  cursor: pointer;
+}
+.matches_list__item__add:hover {
+  background-color: #645434;
+  color: #fff;
+}
 
 .teams {
   display: flex;
@@ -94,13 +113,6 @@
   gap: 10px;
   height: 100%;
   width: 100%;
-}
-
-.matches_list :hover {
-  background-color: #645434;
-  color: #dcc4ae;
-  /*pointer */
-  cursor: pointer;
 }
 
 .new_match {
@@ -211,4 +223,35 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+.matches_list__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  gap: 20px;
+}
+.matches_list__container .matches_list__item:hover {
+  background-color: #645434;
+  color: #dcc4ae;
+  /*pointer */
+  cursor: pointer;
+}
+.actions-matches {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  width: fit-content;
+  height: 100%;
+}
+.edit_icon,
+.delete_icon {
+  color: #74052f;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

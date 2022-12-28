@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Match } = require('../models/match-model')
+const auth = require('../middlewares/auth')
 const mangercontroller = require('../controllers/match-controller')
 
 
@@ -10,5 +11,7 @@ router.get('/matches/:id', mangercontroller.getMatch)
 router.patch('/manager/match/:id', mangercontroller.updateMatch)
 router.post('/manager/match', mangercontroller.createMatch)
 router.delete('/manager/match/:id', mangercontroller.deleteMatch)
+
+router.get('/teams', auth.verifyToken, mangercontroller.getTeams)
 
 module.exports = router

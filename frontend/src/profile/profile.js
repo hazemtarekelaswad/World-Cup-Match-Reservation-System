@@ -11,8 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-import {useNavigate} from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const navigate = useNavigate();
@@ -46,7 +45,7 @@ function Profile() {
           gender: res.data.gender,
           birthDate: moment(res.data.birthDate).format("YYYY-MM-DD"),
           nationality: res.data.nationality,
-          password: res.data.password ? res.data.password : "********", 
+          password: res.data.password ? res.data.password : "********",
         });
         console.log(profile);
       })
@@ -72,19 +71,18 @@ function Profile() {
     console.log(profile);
   }
 
-
   const saveProfile = () => {
     // update using axios and token
     axios
       .put(
         "https://qatar2022worldcupreservationsystem.onrender.com/users/me",
         {
-          firstName: profile.firstName, 
-          lastName: profile.lastName, 
-          birthDate: dateValue, 
-          gender: profile.gender, 
+          firstName: profile.firstName,
+          lastName: profile.lastName,
+          birthDate: dateValue,
+          gender: profile.gender,
           // role: "fan",
-          nationality: profile.nationality, 
+          nationality: profile.nationality,
           // FIXME: add password
         },
         {
@@ -132,7 +130,11 @@ function Profile() {
             <div className="profile-item">
               <div className="label">First Name:</div>
               <div className="field-container">
-                <div className={fname ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    fname ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   <input
                     type="text"
                     name="firstName"
@@ -151,10 +153,14 @@ function Profile() {
                 </div>
               </div>
             </div>
-            <div className='profile-item'>
+            <div className="profile-item">
               <div className="label">Last Name:</div>
               <div className="field-container">
-                <div className={lname ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    lname ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   <input
                     type="text"
                     name="lastName"
@@ -174,10 +180,14 @@ function Profile() {
               </div>
             </div>
 
-            <div className='profile-item'>
+            <div className="profile-item">
               <div className="label">Gender:</div>
               <div className="field-container">
-                <div className={gender ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    gender ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   {gender === true &&
                     (profile.gender === "F" ? "Female" : "Male")}
                   {gender === false && (
@@ -200,10 +210,14 @@ function Profile() {
               </div>
             </div>
 
-            <div className='profile-item'>
+            <div className="profile-item">
               <div className="label">Birth Date:</div>
               <div className="field-container">
-                <div className={birthDate ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    birthDate ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   {birthDate === true && profile.birthDate}
                   {birthDate === false && (
                     <DatePicker
@@ -223,10 +237,14 @@ function Profile() {
               </div>
             </div>
 
-            <div className='profile-item'>
+            <div className="profile-item">
               <div className="label">Nationality:</div>
               <div className="field-container">
-                <div className={nationality ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    nationality ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   <input
                     type="text"
                     name="nationality"
@@ -249,10 +267,14 @@ function Profile() {
               </div>
             </div>
 
-            <div className='profile-item'>
+            <div className="profile-item">
               <div className="label">Passowrd:</div>
               <div className="field-container">
-                <div className={password ? "profile-field" : "profile-field edit-clicked"}>
+                <div
+                  className={
+                    password ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
                   {password === true && profile.password}
                   {password === false && (
                     <input
@@ -278,7 +300,11 @@ function Profile() {
               <div className="profile-item">
                 <div className="label">Confirm passowrd:</div>
                 <div className="field-container">
-                  <div className={password ? "profile-field" : "profile-field edit-clicked"}>
+                  <div
+                    className={
+                      password ? "profile-field" : "profile-field edit-clicked"
+                    }
+                  >
                     <input
                       type="passowrd"
                       name="password"

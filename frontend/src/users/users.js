@@ -1,18 +1,23 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./../components/header/header";
 import "./users.css";
 
 function Users() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // fan, admin, manager
-  const [users, setUsers] = React.useState([]);
-  const [filteredUsers, setFilteredUsers] = React.useState([]);
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
     axios
       .get(
-        "https://qatar2022worldcupreservationsystem.onrender.com/admin/users"
+        "https://qatar2022worldcupreservationsystem.onrender.com/admin/users",
+        {
+          headers: {
+            Token: token,
+          },
+        }
       )
       .then((res) => {
         setUsers(res.data);
@@ -26,7 +31,13 @@ function Users() {
   const Approve = (id) => {
     axios
       .post(
-        `https://qatar2022worldcupreservationsystem.onrender.com/admin/approve/${id}`
+        `https://qatar2022worldcupreservationsystem.onrender.com/admin/approve/${id}`,
+        {},
+        {
+          headers: {
+            Token: token,
+          },
+        }
       )
       .then((res) => {
         window.location.reload();
@@ -40,7 +51,12 @@ function Users() {
     //delete user
     axios
       .delete(
-        `https://qatar2022worldcupreservationsystem.onrender.com/admin/user/${id}`
+        `https://qatar2022worldcupreservationsystem.onrender.com/admin/user/${id}`,
+        {
+          headers: {
+            Token: token,
+          },
+        }
       )
       .then((res) => {
         window.location.reload();
