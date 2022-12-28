@@ -179,13 +179,13 @@ const reserveSeat = async (req, res) => {
                     "message": "You have already reserved one of these seats"
                 })
             
-            // // validate that you haven't reserved any match at the same time of this match
-            // const matchData = await Match.findOne({ _id: match.matchId })
-            // if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
-                //     "status": "failure",
-                //     "message": "You have reserved another match at the same time. They will be clashing matches"
-                // })
-                
+            // validate that you haven't reserved any match at the same time of this match
+            const matchData = await Match.findOne({ _id: match.matchId })
+            if (!match.matchId.equals(req.body.matchId) && matchData.date.getTime() == currMatch.date.getTime()) 
+                return res.status(400).send({
+                    "status": "failure",
+                    "message": "You have reserved another match at the same time. They will be clashing matches"
+                })    
         }
     }
 

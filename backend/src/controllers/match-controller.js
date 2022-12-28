@@ -7,7 +7,12 @@ const { Stadium } = require('../models/stadium-model')
 
 const createMatch = async (req, res) => {
 
-    
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
+
     const matchs =await Match.find({$or:[{"firstTeam":req.body.firstTeam},{"secondTeam":req.body.firstTeam},{"firstTeam":req.body.secondTeam},{"secondTeam":req.body.secondTeam}]})
     console.log("🚀 ~ file: match-controller.js:11 ~ createMatch ~ matchs", matchs)
     const d =new Date( req.body.date);
@@ -34,6 +39,11 @@ for (const match of matchs) {
 }
 
 const updateMatch = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
 
     const match =await Match.updateOne({"_id": req.params.id},{...req.body})
     console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
@@ -64,6 +74,11 @@ const getMatch = async (req, res) => {
 }
 
 const deleteMatch = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
 
     const match =await Match.deleteOne({"_id":req.params.id})
     console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
@@ -72,7 +87,7 @@ const deleteMatch = async (req, res) => {
 const getAllMatches = async (req, res) => {
 
     const matches = await Match.find()
-    matchesToSend = []
+    let matchesToSend = []
     for (let match of matches) {
         const stadium = await Stadium.findById(match.stadium)
         const matchToSend = {
