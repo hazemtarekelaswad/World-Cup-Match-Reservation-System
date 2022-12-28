@@ -45,9 +45,16 @@ const updateMatch = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
-    const match =await Match.updateOne({"_id": req.params.id},{...req.body})
-    console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
-    res.status(200).send({match});
+    const match =await Match.updateOne({ "_id": req.params.id }, { ...req.body })
+    if (!match) return res.status(400).send({
+        "status": "failure",
+        "message": "match does not exist in the system"
+    })
+
+    res.status(201).send({
+        "status": "success",
+        "message": "match has been updated successfully"
+    })
 }
 
 const getMatch = async (req, res) => {
@@ -191,7 +198,7 @@ const updateStadium = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
-    stadium = await Stadium.findOneAndUpdate({ "_id": req.params.id },{ ...req.body })
+    const stadium = await Stadium.findOneAndUpdate({ "_id": req.params.id },{ ...req.body })
     if (!stadium) return res.status(400).send({
         "status": "failure",
         "message": "Stadium does not exist in the system"
