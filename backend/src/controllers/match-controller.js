@@ -56,7 +56,7 @@ const getMatch = async (req, res) => {
     const matchToSend = {
         matchId: match._id,
         firstTeam: match.firstTeam,
-        secondTeam: match.firstTeam,
+        secondTeam: match.secondTeam,
         stadium: {
             name: stadium.name,
             columnsCount: stadium.columnsCount,
@@ -93,7 +93,7 @@ const getAllMatches = async (req, res) => {
         const matchToSend = {
             matchId: match._id,
             firstTeam: match.firstTeam,
-            secondTeam: match.firstTeam,
+            secondTeam: match.secondTeam,
             stadium: {
                 name: stadium.name,
                 columnsCount: stadium.columnsCount,
@@ -112,6 +112,28 @@ const getAllMatches = async (req, res) => {
     res.status(200).send(matchesToSend)
 }
 
+const addStadium = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
+
+     const newStadium = new Stadium(req.body)
+     console.log("🚀 ~ file: stadium-route.js:10 ~ router.post ~ newStadium", newStadium)
+     try {
+         await newStadium.save()
+         res.status(200).send({
+            "status": "success",
+            "message": "Stadium created successfully"
+        })
+     } catch (err) {
+         res.status(500).send({
+            "status": "failure",
+            "message": "Internal server error"
+        })
+     }
+ }
 
 
 module.exports = { 
@@ -119,5 +141,6 @@ module.exports = {
     updateMatch,
     getMatch,
     getAllMatches,
-    deleteMatch
+    deleteMatch,
+    addStadium
 }
