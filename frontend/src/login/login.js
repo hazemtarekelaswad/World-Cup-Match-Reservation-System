@@ -47,7 +47,7 @@ function Login({ signupParam }) {
     gender: "",
     nationality: "",
     email: "",
-    role: "fan",
+    role: "",
   });
 
   function setUserOnChange(event) {
@@ -73,7 +73,7 @@ function Login({ signupParam }) {
           gender: user.gender,
           nationality: user.nationality,
           email: user.email,
-          role: "fan",
+          role: user.role,
         }
       )
       .then((res) => {
@@ -97,6 +97,7 @@ function Login({ signupParam }) {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         getRole(res.data.token);
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
