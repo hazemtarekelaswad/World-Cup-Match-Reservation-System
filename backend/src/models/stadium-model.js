@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const StadiumSchema = new mongoose.mongoose.Schema({
     name: {
         type: String,
+        unique: true,
         required: true
     },
     columnsCount: {

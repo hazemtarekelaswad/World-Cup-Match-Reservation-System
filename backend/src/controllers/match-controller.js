@@ -49,6 +49,7 @@ const updateMatch = async (req, res) => {
     console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
     res.status(200).send({match});
 }
+
 const getMatch = async (req, res) => {
     const match = await Match.findById(req.params.id)
     const stadium = await Stadium.findById(match.stadium)
@@ -119,8 +120,13 @@ const addStadium = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
+    const stadium = await Stadium.findOne({ "name": req.body.name })
+    if (stadium) return res.status(400).send({
+        "status": "failure",
+        "message": "Stadium has already been created, choose another name"
+    })
+
      const newStadium = new Stadium(req.body)
-     console.log("🚀 ~ file: stadium-route.js:10 ~ router.post ~ newStadium", newStadium)
      try {
          await newStadium.save()
          res.status(200).send({
@@ -135,6 +141,68 @@ const addStadium = async (req, res) => {
      }
  }
 
+const getStadiums = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
+
+    const stadiums = await Stadium.find()
+    let stadiumsToSend = []
+    for (let stadium of stadiums) {
+        const stadiumToSend = {
+            stadiumId: stadium._id,
+            name: stadium.name,
+            columnsCount: stadium.columnsCount,
+            rowsCount: stadium.rowsCount
+        }
+        stadiumsToSend.push(stadiumToSend)
+    }
+    
+    res.status(200).send({"stadiums" : stadiumsToSend})
+ }
+ 
+const getStadium = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
+
+    const stadium = await Stadium.findById(req.params.id)
+    if (!stadium) return res.status(404).send({
+        "status": "failure",
+        "message": "Stadium does not exist in the system"
+    })
+    
+    res.status(200).send({
+        stadiumId: stadium._id,
+        name: stadium.name,
+        columnsCount: stadium.columnsCount,
+        rowsCount: stadium.rowsCount
+    })
+}
+
+const updateStadium = async (req, res) => {
+    // validate the role of manager
+    if (req.authUser.role != "manager") return res.status(403).send({
+        "status": "failure",
+        "message": "Forbidden access. Must be a manager"
+    })
+
+    stadium = await Stadium.findOneAndUpdate({ "_id": req.params.id },{ ...req.body })
+    if (!stadium) return res.status(400).send({
+        "status": "failure",
+        "message": "Stadium does not exist in the system"
+    })
+
+    res.status(201).send({
+        "status": "success",
+        "message": "Stadium has been updated successfully"
+    })
+}
+
 
 module.exports = { 
     createMatch,
@@ -142,5 +210,8 @@ module.exports = {
     getMatch,
     getAllMatches,
     deleteMatch,
-    addStadium
+    addStadium,
+    getStadiums,
+    getStadium,
+    updateStadium
 }

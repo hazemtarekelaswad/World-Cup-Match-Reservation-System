@@ -5,10 +5,10 @@ const managerController = require('../controllers/match-controller')
 const auth = require('../middlewares/auth')
 
 
-
-// TODO: Handle HTTP requests
-
  router.post('/stadium', auth.verifyToken, managerController.addStadium)
+ router.get('/stadiums', auth.verifyToken, managerController.getStadiums)
+ router.get('/stadiums/:id', auth.verifyToken, managerController.getStadium)
+ router.put('/stadiums/:id', auth.verifyToken, managerController.updateStadium)
 
 
 module.exports = router
