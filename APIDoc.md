@@ -204,9 +204,9 @@ status: `200`
     "firstName": "string",
     "lastName": "string",
     "birthDate": "yyyy-mm-dd",
+    "password": "string",
     "gender": "M" | "F",
     "nationality": "string",
-    "role": "fan" | "manager" | "admin"
 }
 ```
 Example
@@ -216,7 +216,6 @@ Example
     "lastName": "Elsayed",
     "birthDate": "1999-09-20",
     "gender": "M",
-    "role": "fan"
 }
 ```
 
@@ -273,8 +272,12 @@ status: `201`
 ```json
 {
     "matchId": "string",
-    "seatColumn": "number",
-    "seatRow": "number",
+    "seats": [
+        {
+            "seatColumn": "number",
+            "seatRow": "number"
+        }
+    ],
     "creditCard": "string",
     "pinNumber": "number"
 }
@@ -282,10 +285,18 @@ status: `201`
 Example
 ```json
 {
-    "matchId": "d39ao62105l539530761d6e5",
-    "seatColumn": 50,
-    "seatRow": 10,
-    "creditCard": "123456789",
+    "matchId": "639a5621051539530761d6e5",
+    "seats": [
+        {
+            "seatColumn": 50,
+            "seatRow": 10
+        },
+        {
+            "seatColumn": 43,
+            "seatRow": 12
+        }
+    ],
+    "creditCard": "16589764561651",
     "pinNumber": 1259
 }
 ```

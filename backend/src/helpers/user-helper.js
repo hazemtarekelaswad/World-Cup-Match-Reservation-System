@@ -53,8 +53,12 @@ const validateUserUpdate = (userData) => {
 const validateSeatReservation = (reservationInfo) => {
     const schema = Joi.object({
         matchId: Joi.string().trim().required(),
-        seatColumn: Joi.number().integer().positive().required(),
-        seatRow: Joi.number().integer().positive().required(),
+        seats: Joi.array().items(
+            Joi.object({
+                seatColumn: Joi.number().integer().positive().required(),
+                seatRow: Joi.number().integer().positive().required(),
+            }).required()
+        ).required(),
         creditCard: Joi.string().trim().required(),
         pinNumber: Joi.number().integer().positive().required(),
     })

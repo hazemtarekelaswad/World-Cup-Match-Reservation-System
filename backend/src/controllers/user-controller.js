@@ -169,19 +169,22 @@ const reserveSeat = async (req, res) => {
     })
 
     for (let match of user.matches) {
-        if (match.matchId.equals(req.body.matchId) && match.seatColumn == req.body.seatColumn && match.seatRow == req.body.seatRow) 
-            return res.status(400).send({
-                "status": "failure",
-                "message": "You have already reserved this seat"
-            })
-        
-        // // validate that you haven't reserved any match at the same time of this match
-        // const matchData = await Match.findOne({ _id: match.matchId })
-        // if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
-        //     "status": "failure",
-        //     "message": "You have reserved another match at the same time. They will be clashing matches"
-        // })
-        
+        for (let seat of req.body.seats) {
+
+            if (match.matchId.equals(req.body.matchId) && match.seatColumn == seat.seatColumn && match.seatRow == seat.seatRow) 
+                return res.status(400).send({
+                    "status": "failure",
+                    "message": "You have already reserved one of these seats"
+                })
+            
+            // // validate that you haven't reserved any match at the same time of this match
+            // const matchData = await Match.findOne({ _id: match.matchId })
+            // if (matchData.date.getTime() == currMatch.date.getTime()) return res.status(400).send({
+                //     "status": "failure",
+                //     "message": "You have reserved another match at the same time. They will be clashing matches"
+                // })
+                
+        }
     }
 
     // validate future match
@@ -197,34 +200,40 @@ const reserveSeat = async (req, res) => {
         "message": "Stadium does not exist in the system"
     })
 
-    if (req.body.seatColumn >= currStadium.columnsCount || req.body.seatRow >= currStadium.rowsCount)
+    for (let seat of req.body.seats) {
+        if (seat.seatColumn >= currStadium.columnsCount || seat.seatRow >= currStadium.rowsCount)
         return res.status(400).send({
             "status": "failure",
-            "message": "seatColumn or seatRow is out of range"
+            "message": "One of the seats is out of range (seatRow or seatColumn is out of the stadium shape)"
         })
+    }
     
     // validate vacant seat
     for (let fan of currMatch.fans) {
-        if (fan.seatColumn == req.body.seatColumn && fan.seatRow == req.body.seatRow) 
-            return res.status(400).send({
-                "status": "failure",
-                "message": "This seat is reserved"
-            })
+        for (let seat of req.body.seats) {
+            if (fan.seatColumn == seat.seatColumn && fan.seatRow == seat.seatRow) 
+                return res.status(400).send({
+                    "status": "failure",
+                    "message": "One of the seats is already reserved"
+                })
+        }
     }
 
     // Success
     try {
-        await User.updateOne({ _id: user._id }, { $push: { matches: {
-            "matchId": req.body.matchId,
-            "seatRow": req.body.seatRow,
-            "seatColumn": req.body.seatColumn
-        }}})
+        for (let seat of req.body.seats) {
+            await User.updateOne({ _id: user._id }, { $push: { matches: {
+                "matchId": req.body.matchId,
+                "seatRow": seat.seatRow,
+                "seatColumn": seat.seatColumn
+            }}})
 
-        await Match.updateOne({ _id: currMatch._id }, { $push: { fans: {
-            "fanId":  user._id,
-            "seatRow": req.body.seatRow,
-            "seatColumn": req.body.seatColumn
-        }}})
+            await Match.updateOne({ _id: currMatch._id }, { $push: { fans: {
+                "fanId":  user._id,
+                "seatRow": seat.seatRow,
+                "seatColumn": seat.seatColumn
+            }}})
+        }
 
     } catch (err) {
         res.status(500).send({
