@@ -1,5 +1,5 @@
-F1: Approve new users as an authority. 15 .........................[]
-F2: Remove an existing user. 10....................................[]
+F1: Approve new users as an authority. 15 .........................[DONE]
+F2: Remove an existing user. 10....................................[DONE]
 F3: Create a new match event 15 ...................................[]
 F4: Edit the details of an existing match 10 ......................[]
 F5: Add a new stadium. 10 .........................................[]
