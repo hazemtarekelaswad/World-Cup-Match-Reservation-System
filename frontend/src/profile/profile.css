@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 40px;
 }
 
 .edit-icon{
@@ -94,7 +94,7 @@
     justify-content: center;
     cursor: pointer;
 
-    z-index: 110;
+    z-index: 1;
 }
 .profile-icon{
     height: 60%;
@@ -107,15 +107,41 @@
     display: flex;
     align-items: center;
 }
-.profile-field #firstname, .profile-field #lastname, .profile-field #nationality, .profile-field #password,
+.profile-field #firstname, .profile-field #lastname, .profile-field #nationality, .profile-field #password{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    padding: 0 10px;
+    font-weight: 600;
+}
+.Dropdown{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    font-weight: 600;
+}
+.Dropdown-control{
+    background-color: transparent;
+    border: #000 solid 2px;
+    border-radius: 5px;
+}
+
 .profile-field{
     width: 280px;
     height: 40px;
     border: none;
     background-color: #ecfaff;
     color: #000;
-    padding: 0 10px;
+    /* padding: 0 10px; */
     font-weight: 600;
+}
+
+.edit-clicked{
+    background-color: #9ce5ff;
 }
 
 
@@ -143,4 +169,8 @@
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
+}
+
+.react-calendar{
+    z-index: 1000;
 }
