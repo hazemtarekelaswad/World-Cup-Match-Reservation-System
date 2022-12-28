@@ -426,27 +426,7 @@ status: `201`
 
 **`GET`** | `/teams`
 
-**Headers**
-
-**`Token:`** "string"
-
 **Response**
-
-status: `401` 
-```json
-{
-    "status": "failure",
-    "message": "Unauthorized request, provide a token"
-}
-```
-
-status: `403` 
-```json
-{
-    "status": "failure",
-    "message": "<error_msg>"
-}
-```
 
 status: `200`
 ```json
@@ -571,6 +551,158 @@ status: `200`
         ]
     }
 ]
+```
+</details>
+
+---
+
+<!-- Endpoint -->
+<details><summary><h3>Get Pending Users</h3></summary>
+
+**`GET`** | `/admin/getpandeng`
+
+**Headers**
+
+**`Token:`** "string"
+
+**Response**
+
+status: `401` 
+```json
+{
+    "status": "failure",
+    "message": "Unauthorized request, provide a token"
+}
+```
+
+status: `403` 
+```json
+{
+    "status": "failure",
+    "message": "Permission denied, invalid token"
+}
+```
+
+status: `200`
+```json
+{
+    "users": [
+        {
+            "_id": "string",
+            "username": "string",
+            "password": "string",
+            "firstName": "string",
+            "lastName": "string",
+            "birthDate": "yyyy-mm-dd",
+            "gender": "M" | "F",
+            "email": "string",
+            "role": "fan" | "manager" | "admin",
+            "status": "pending",
+            "matches": [],
+            "__v": 0
+        }
+    ]
+}
+```
+</details>
+
+---
+
+<!-- Endpoint -->
+<details><summary><h3>Approve user</h3></summary>
+
+**`POST`** | `/admin/approve/:id`
+
+**Headers**
+
+**`Token:`** "string"
+
+**Response**
+
+status: `401` 
+```json
+{
+    "status": "failure",
+    "message": "Unauthorized request, provide a token"
+}
+```
+
+status: `403` 
+```json
+{
+    "status": "failure",
+    "message": "Permission denied, invalid token"
+}
+```
+
+status: `500` 
+```json
+{
+    "status": "failure",
+    "message": "Internal server error"
+}
+```
+
+status: `200`
+```json
+{
+    "status": "success",
+    "message": "approved successfully"
+}
+```
+</details>
+
+---
+
+<!-- Endpoint -->
+<details><summary><h3>Delete user</h3></summary>
+
+**`DELETE`** | `/admin/user/:id`
+
+**Headers**
+
+**`Token:`** "string"
+
+**Response**
+
+status: `401` 
+```json
+{
+    "status": "failure",
+    "message": "Unauthorized request, provide a token"
+}
+```
+
+status: `403` 
+```json
+{
+    "status": "failure",
+    "message": "<error_msg>"
+}
+```
+
+status: `404` 
+```json
+{
+    "status": "failure",
+    "message": "User has already been deleted"
+}
+```
+
+status: `500` 
+```json
+{
+    "status": "failure",
+    "message": "Internal server error"
+}
+```
+
+status: `200`
+```json
+{
+    "status": "success",
+    "message": "Deleted successfully"
+}
 ```
 </details>
 
