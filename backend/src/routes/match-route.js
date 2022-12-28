@@ -12,6 +12,4 @@ router.patch('/manager/match/:id', auth.verifyToken, mangercontroller.updateMatc
 router.post('/manager/match', auth.verifyToken, mangercontroller.createMatch)
 router.delete('/manager/match/:id', auth.verifyToken, mangercontroller.deleteMatch)
 
-router.get('/teams', auth.verifyToken, mangercontroller.getTeams)
-
 module.exports = router

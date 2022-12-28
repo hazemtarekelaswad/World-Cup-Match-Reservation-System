@@ -7,6 +7,8 @@ const userHelper = require('../helpers/user-helper')
 const { User } = require('../models/user-model')
 const { Match } = require('../models/match-model')
 const { Stadium } = require('../models/stadium-model')
+const { Team } = require('../models/team-model')
+
 
 const signup = async (req, res) => {
     req.body.status = userHelper.userStatus.pending
@@ -328,11 +330,24 @@ const cancelSeat = async (req, res) => {
     }
 }
 
+const getTeams = async (req, res) => {
+    // if (req.authUser.role != "manager") return res.status(403).send({
+    //     "status": "failure",
+    //     "message": "Forbidden access. Must be a manager"
+    // })
+
+    const teams = await Team.find()
+    teamsToSend = []
+    for (let team of teams) teamsToSend.push({name: team.name})
+    res.status(200).send({"teams": teamsToSend})
+}
+
 module.exports = { 
     signup,
     signin,
     getUser,
     updateUser,
     reserveSeat,
-    cancelSeat
+    cancelSeat,
+    getTeams
 }

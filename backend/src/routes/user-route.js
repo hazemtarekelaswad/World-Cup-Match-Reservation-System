@@ -11,6 +11,8 @@ router.put('/users/me', auth.verifyToken, userController.updateUser)
 router.put('/users/reservation', auth.verifyToken, userController.reserveSeat) 
 router.put('/users/cancellation', auth.verifyToken, userController.cancelSeat)
 
+router.get('/teams', userController.getTeams)
+
 
 
 
