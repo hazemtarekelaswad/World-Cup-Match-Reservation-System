@@ -29,10 +29,6 @@ function Header() {
           <div className="header__menuRight">
             <a href="/login">Login</a>
             <a href="/signup">Register</a>
-
-            <a href="/reservations">
-              <FontAwesomeIcon className="cart-icon" icon={faCartShopping} />
-            </a>
           </div>
         ) : (
           <div className="header__menuRight">
