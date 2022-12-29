@@ -25,6 +25,7 @@ function Tickets({ matchID }) {
   const [occupiedSeats, setOccupiedSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   
+  
   useEffect(() => {
     axios
       .get(
@@ -33,8 +34,8 @@ function Tickets({ matchID }) {
       .then((res) => {
         console.log(res.data);
         setMatch(res.data);
-        setRows(Array(res.data.stadium.rowsCount / 10).fill(0));
-        setColumns(Array(res.data.stadium.columnsCount / 10).fill(0));
+        setRows(Array(res.data.stadium.rowsCount).fill(0));
+        setColumns(Array(res.data.stadium.columnsCount).fill(0));
         setOccupiedSeats(
           res.data.fans.map((fan) => {
             return { row: fan.seatRow, column: fan.seatColumn };
