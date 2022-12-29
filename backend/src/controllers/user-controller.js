@@ -351,9 +351,14 @@ const cancelSeat = async (req, res) => {
     // })
 
     // If found, validate its 3 days limit
-    if (currMatch.date.getTime() <= Date.now() || Math.abs(currMatch.date.getTime() - Date.now()) / (1000*3600*24) > 3) return res.status(400).send({
+    if (currMatch.date.getTime() <= Date.now()) return res.status(400).send({
         "status": "failure",
-        "message": "Cancellation is available only in 3 days before the match time"
+        "message": "The match has already finished"
+    })
+
+    if (Math.abs(currMatch.date.getTime() - Date.now()) / (1000*3600*24) <= 3) return res.status(400).send({
+        "status": "failure",
+        "message": "You can not cancel a reservation in any of the three days before the match"
     })
 
     // Cancel reservation by removing it from matches and remove fan from fans    
