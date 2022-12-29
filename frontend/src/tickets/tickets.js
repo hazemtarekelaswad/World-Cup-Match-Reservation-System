@@ -13,7 +13,8 @@ import { faFlag } from "@fortawesome/free-solid-svg-icons";
 // linemen
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Message from "../errorMessage/errorMessage";
- 
+import moment from "moment";
+
 function Tickets({ matchID }) {
   const token = localStorage.getItem("token");
   // console.log("token", token);
@@ -155,7 +156,7 @@ function Tickets({ matchID }) {
             </div>
             <div className="match__info__item">
               <FontAwesomeIcon icon={faClock} />
-              <p>{match.date}</p>
+              <p>{moment(match.date).format("yyyy-MM-DD")} -- {moment(match.date).format("HH:mm")}</p>
             </div>
             <div className="match__info__item">
               <FontAwesomeIcon icon={faFlag} />
@@ -172,7 +173,7 @@ function Tickets({ matchID }) {
           </div>
         </div>
       </div>
-      
+
         {show && <Message message={errMsg} show={show} setShow={setShow} />}
 
       <div className="grid">
