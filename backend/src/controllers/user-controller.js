@@ -12,6 +12,8 @@ const { Team } = require('../models/team-model')
 
 const signup = async (req, res) => {
     req.body.status = userHelper.userStatus.pending
+    if ("nationality" in req.body && req.body["nationality"] === "") delete req.body["nationality"]
+
 
     // Validate all user data
     const { error } = userHelper.validateUserSignup(req.body)
@@ -117,6 +119,9 @@ const getUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
+
+    if ("nationality" in req.body && req.body["nationality"] === "") delete req.body["nationality"]
+
 
     // Validate the request body
     const { error } = userHelper.validateUserUpdate(req.body)
