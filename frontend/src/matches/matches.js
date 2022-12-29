@@ -20,30 +20,9 @@ function Matches() {
   const userType = localStorage.getItem("role");
   const [matches, setMatches] = useState([]);
   const [teams, setTeams] = useState(["Algeria", "Argentina"]);
-  // const [stadiums, setStadiums] = useState([
-  const [stadiums, setStadiums] = useState([
-    //FIXME: get stadiums to pass their id to the match
-    {
-      _id: "639a4f107ae74d5f9de83751",
-      name: "ay 7aga",
-      columnsCount: 100,
-      rowsCount: 150,
-    },
-    {
-      _id: "63ac2da865ce80b49de6e144",
-      name: "Borg Elarab",
-      columnsCount: 50,
-      rowsCount: 30,
-    },
-    {
-      _id: "63aca2893fff7dee3edde16d",
-      name: "Cairo",
-      columnsCount: 70,
-      rowsCount: 30,
-    },
-  ]);
-
+  const [stadiums, setStadiums] = useState([]);
   const [newMatch, setNewMatch] = useState(false);
+  const [editMatch, setEditMatch] = useState(false);
   const [match, setMatch] = useState({
     firstTeam: "",
     secondTeam: "",
@@ -82,23 +61,23 @@ function Matches() {
       });
   }, [teams.length]);
 
-  // useEffect(() => {
-  //   // use the token to get the stadiums
-  //   axios
-  //     .get("https://qatar2022worldcupreservationsystem.onrender.com/stadiums", {
-  //       headers: {
-  //         Token: token,
-  //       },
-  //     })
-  //     .then((res) => {
-  //       setStadiums(res.data.stadiums);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, [stadiums.length]);
+  useEffect(() => {
+    // use the token to get the stadiums
+    axios
+      .get("https://qatar2022worldcupreservationsystem.onrender.com/stadiums", {
+        headers: {
+          Token: token,
+        },
+      })
+      .then((res) => {
+        setStadiums(res.data.stadiums);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [stadiums.length]);
 
-  const handleAddMatch = () => {
+  const handleAddMatch = (id) => {
     if (
       match.firstTeam === "" ||
       match.secondTeam === "" ||
@@ -130,33 +109,55 @@ function Matches() {
     const temp_match = {
       firstTeam: match.firstTeam,
       secondTeam: match.secondTeam,
-      stadium: match.stadium,
-      // stadium: match.stadium,
+      stadium: editMatch ? match.stadium.stadiumId : match.stadium,
       date: match.date + "T" + match.time + ":00.000+00:00",
-      //date: "2023-06-12T12:00:00.000+00:00",
       referee: match.referee,
       firstLineman: match.firstLineman,
       secondLineman: match.secondLineman,
     };
-    console.log("temp_match: ", temp_match);
-    axios
-      .post(
-        "https://qatar2022worldcupreservationsystem.onrender.com/manager/match",
-        temp_match,
-        {
-          headers: {
-            Token: token,
-          },
-        }
-      )
-      .then((res) => {
-        window.location.reload();
-        setNewMatch(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //add match or edit match
+    if (editMatch) {
+      console.log("edit match");
+      console.log("id: ", id);
+      console.log("temp_match: ", temp_match);
+      axios
+        .put(
+          `https://qatar2022worldcupreservationsystem.onrender.com/matches/${id}`,
+          temp_match,
+          {
+            headers: {
+              Token: token,
+            },
+          }
+        )
+        .then((res) => {
+          window.location.reload();
+          setEditMatch(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .post(
+          "https://qatar2022worldcupreservationsystem.onrender.com/manager/match",
+          temp_match,
+          {
+            headers: {
+              Token: token,
+            },
+          }
+        )
+        .then((res) => {
+          window.location.reload();
+          setNewMatch(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
+
   const handleDeleteMatch = (matchId) => {
     axios
       .delete(
@@ -240,7 +241,8 @@ function Matches() {
                       className="edit_icon"
                       onClick={() => {
                         setNewMatch(true);
-                        //TODO: edit match callback
+                        setMatch(match);
+                        setEditMatch(true);
                       }}
                     />
                     <FontAwesomeIcon
@@ -279,6 +281,7 @@ function Matches() {
                     className="close"
                     onClick={() => {
                       setNewMatch(false);
+                      setEditMatch(false);
                     }}
                   >
                     <span>X</span>
@@ -290,6 +293,7 @@ function Matches() {
                         <h3>First Team</h3>
                         {/* select from teams */}
                         <select
+                          value={match.firstTeam || ""}
                           onChange={(e) => {
                             setMatch({
                               ...match,
@@ -306,6 +310,7 @@ function Matches() {
                         <h3>Second Team</h3>
                         {/* select from teams */}
                         <select
+                          value={match.secondTeam || ""}
                           onChange={(e) => {
                             setMatch({
                               ...match,
@@ -322,12 +327,13 @@ function Matches() {
                         <h3>Stadium</h3>
                         {/* select from stadiums */}
                         <select
+                          value={match.stadium.name || ""}
                           onChange={(e) => {
                             setMatch({
                               ...match,
                               stadium: stadiums.find(
                                 (stadium) => stadium.name === e.target.value
-                              )._id,
+                              ).stadiumId,
                             });
                           }}
                         >
@@ -339,6 +345,7 @@ function Matches() {
                       <div className="input_info">
                         <h3>Date</h3>
                         <input
+                          //TODO: add match date in its format
                           type="date"
                           onChange={(e) => {
                             setMatch({
@@ -351,6 +358,7 @@ function Matches() {
                       <div className="input_info">
                         <h3>Time</h3>
                         <input
+                          //TODO: add match time in its format
                           type="time"
                           onChange={(e) => {
                             setMatch({
@@ -363,6 +371,7 @@ function Matches() {
                       <div className="input_info">
                         <h3>Referee</h3>
                         <input
+                          value={match.referee || ""}
                           type="text"
                           onChange={(e) => {
                             setMatch({
@@ -375,6 +384,7 @@ function Matches() {
                       <div className="input_info">
                         <h3>Lineman 1</h3>
                         <input
+                          value={match.firstLineman || ""}
                           type="text"
                           onChange={(e) => {
                             setMatch({
@@ -387,6 +397,7 @@ function Matches() {
                       <div className="input_info">
                         <h3>Lineman 2</h3>
                         <input
+                          value={match.secondLineman || ""}
                           type="text"
                           onChange={(e) => {
                             setMatch({
@@ -398,10 +409,14 @@ function Matches() {
                       </div>
                       <button
                         onClick={() => {
-                          handleAddMatch();
+                          if (editMatch) {
+                            handleAddMatch(match.matchId);
+                          } else {
+                            handleAddMatch(0);
+                          }
                         }}
                       >
-                        Add Match
+                        {editMatch ? "Update Match" : "Add Match"}
                       </button>
                     </div>
                   </div>
