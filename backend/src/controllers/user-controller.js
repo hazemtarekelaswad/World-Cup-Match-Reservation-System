@@ -336,18 +336,18 @@ const cancelSeat = async (req, res) => {
         "message": "Match does not exist in the system"
     })
 
-    let isFound = false
-    for (let match of user.matches) {
-        if (match.matchId.equals(req.body.matchId) && match.seatColumn == req.body.seatColumn && match.seatRow == req.body.seatRow) {
-            isFound = true
-            break
-        }
-    }
+    // let isFound = false
+    // for (let match of user.matches) {
+    //     if (match.matchId.equals(req.body.matchId) && match.seatColumn == req.body.seatColumn && match.seatRow == req.body.seatRow) {
+    //         isFound = true
+    //         break
+    //     }
+    // }
 
-    if (!isFound) return res.status(400).send({
-        "status": "failure",
-        "message": "You are not the one who reserved this seat to cancel"
-    })
+    // if (!isFound) return res.status(400).send({
+    //     "status": "failure",
+    //     "message": "You are not the one who reserved this seat to cancel"
+    // })
 
     // If found, validate its 3 days limit
     if (currMatch.date.getTime() <= Date.now() || Math.abs(currMatch.date.getTime() - Date.now()) / (1000*3600*24) > 3) return res.status(400).send({
