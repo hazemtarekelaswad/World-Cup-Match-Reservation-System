@@ -102,6 +102,7 @@ const getUser = async (req, res) => {
 
     // Success, send the user's data
     userToSend = { 
+        userId: user._id,
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
