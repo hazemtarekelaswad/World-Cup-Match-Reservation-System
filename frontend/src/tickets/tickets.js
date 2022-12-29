@@ -32,6 +32,7 @@ function Tickets({ matchID }) {
   const [rowCount, setRowCount] = useState(0);
 
   const [show, setShow] = useState(false);
+  const [showConfirmErr, setShowConfirmErr] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
@@ -98,7 +99,13 @@ function Tickets({ matchID }) {
   const handleConfirm = () => {
     console.log(selectedSeats);
     console.log(match.matchId);
-    
+     
+    if (userType !== "fan") {
+      setErrMsg("Only fans can reserve tickets");
+      setShowConfirmErr(true);
+      return;
+    }
+
     axios
       .put(
         `https://qatar2022worldcupreservationsystem.onrender.com/users/reservation`,
@@ -180,11 +187,14 @@ function Tickets({ matchID }) {
         <div className="grid__header">
           <h1>Seat reservation</h1>
         </div>
+
+        {userType && <Message message={"Only fans can reserve tickets"} show={true} setShow={setShow} />}
+
         {rows.map((row, rowIndex) => (
           <div className="row" key={rowIndex}>
             {columns.map((column, columnIndex) => (
               <div
-                className={`seat ${
+                className={`${(userType==="fan") ? "seat-fan seat" : "seat"} ${
                   occupiedSeats.find(
                     (seat) =>
                       seat.row === rowIndex + 1 &&
@@ -203,6 +213,9 @@ function Tickets({ matchID }) {
                 }`}
                 key={columnIndex}
                 onClick={() => {
+                  if (userType !== "fan") {
+                    return;
+                  }
                   // disable the click if the seat is occupied
                   if (
                     occupiedSeats.find(
@@ -245,6 +258,8 @@ function Tickets({ matchID }) {
             ))}
           </div>
         ))}
+        {showConfirmErr && <Message message={errMsg} show={showConfirmErr} setShow={setShowConfirmErr} />}
+
         <button
           className="button"
           onClick={() => {
