@@ -136,11 +136,13 @@ function Tickets({ matchID }) {
       )
       .then((res) => {
         console.log(res);
+        window.location.href = `/reservations`;
       })
       .catch((err) => {
         console.log(err);
         setErrMsg(err.response.data.message);
         setShow(true);
+        setShowConfirmErr(true);
       });
   };
   return (
@@ -188,13 +190,13 @@ function Tickets({ matchID }) {
           <h1>Seat reservation</h1>
         </div>
 
-        {userType && <Message message={"Only fans can reserve tickets"} show={true} setShow={setShow} />}
+        {userType !== "fan" && <Message message={"Only fans can reserve tickets"} show={true} setShow={setShow} />}
 
         {rows.map((row, rowIndex) => (
           <div className="row" key={rowIndex}>
             {columns.map((column, columnIndex) => (
               <div
-                className={`${(userType==="fan") ? "seat-fan seat" : "seat"} ${
+                className={`${(userType==="fan") ? "seat-fan seat" : "seat seat-not-fan"} ${
                   occupiedSeats.find(
                     (seat) =>
                       seat.row === rowIndex + 1 &&

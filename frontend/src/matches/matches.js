@@ -193,6 +193,19 @@ function Matches() {
         setShow(true);
       });
   };
+
+  function getTrueTime(date) {
+    // get time from date
+    let time = date.split("T")[1].split(".")[0];
+    // console.log("time: ", time);
+    let hour = time.split(":")[0];
+    let min = time.split(":")[1];
+
+    time = hour + ":" + min;
+    // console.log("time: ", time);
+    return time;
+  }
+
   return (
     <div className="matches">
       <Header />
@@ -245,7 +258,9 @@ function Matches() {
 
                     <div className="info">
                       <FontAwesomeIcon icon={faClock} />
-                      <h3>{moment(match.date).format("hh:mm")}</h3>
+                      <h3>{
+                        getTrueTime(match.date)
+                      }</h3>
                     </div>
                     <div className="info">
                       <FontAwesomeIcon icon={faUser} />
@@ -294,7 +309,7 @@ function Matches() {
             <div className="new_match">
               <div className="new_match__container">
                 <div className="new_match__container__header">
-                  <h1>Add Match</h1>
+                  <h1>{editMatch ? "Edit Match" : "Add Match"}</h1>
                   {/* close button */}
                   <div
                     className="close"
@@ -365,6 +380,8 @@ function Matches() {
                         <h3>Date</h3>
                         <input
                           //TODO: add match date in its format
+                          value={moment(match.date).format("YYYY-MM-DD") || ""}
+                          // format="YYYY-MM-DD"
                           type="date"
                           onChange={(e) => {
                             setMatch({
@@ -379,7 +396,9 @@ function Matches() {
                         <input
                           //TODO: add match time in its format
                           type="time"
+                          value={match.date ? (getTrueTime(match.date)) : "00:00"}
                           onChange={(e) => {
+                            console.log(e.target.value);
                             setMatch({
                               ...match,
                               time: e.target.value,

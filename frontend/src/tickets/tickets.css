@@ -99,7 +99,7 @@
 .seat-fan:hover {
   cursor: pointer;
 }
-.seat:hover {
+.seat-not-fan:hover {
   cursor: not-allowed;
 }
 .seat.occupied:hover {
