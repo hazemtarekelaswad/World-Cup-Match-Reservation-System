@@ -15,6 +15,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function Tickets({ matchID }) {
   const token = localStorage.getItem("token");
+  // console.log("token", token);
   const userType = localStorage.getItem("role");
   //FIXME: add an id to the match and use it to get the match data
   const match_id = useParams().id;
@@ -23,20 +24,24 @@ function Tickets({ matchID }) {
   const [columns, setColumns] = useState([]);
   const [occupiedSeats, setOccupiedSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  
+  
   useEffect(() => {
     axios
       .get(
         `https://qatar2022worldcupreservationsystem.onrender.com/matches/${match_id}`
       )
       .then((res) => {
+        console.log(res.data);
         setMatch(res.data);
-        setRows(Array(res.data.stadium.rowsCount / 10).fill(0));
-        setColumns(Array(res.data.stadium.columnsCount / 10).fill(0));
+        setRows(Array(res.data.stadium.rowsCount).fill(0));
+        setColumns(Array(res.data.stadium.columnsCount).fill(0));
         setOccupiedSeats(
           res.data.fans.map((fan) => {
             return { row: fan.seatRow, column: fan.seatColumn };
           })
         );
+        console.log(occupiedSeats);
       })
       .catch((err) => {
         console.log(err);
@@ -45,17 +50,34 @@ function Tickets({ matchID }) {
 
   const handleConfirm = () => {
     console.log(selectedSeats);
+    console.log(match.matchId);
+    
     axios
       .put(
-        `https://qatar2022worldcupreservationsystem.onrender.com/matches/${match_id}`,
+        `https://qatar2022worldcupreservationsystem.onrender.com/users/reservation`,
         {
-          fans: selectedSeats.map((seat) => {
+          matchId: match.matchId,
+          seats: selectedSeats.map(seat => {
             return {
-              fanId: "6398a97d737c37fab7d8d80f", // TODO: get the user id from the backend
               seatRow: seat.row,
               seatColumn: seat.column,
-            };
+            }
           }),
+          creditCard: "123456789", // TODO: get the credit card from the user
+          pinNumber: "1234", // TODO: get the pin number from the user
+
+          // fans: selectedSeats.map((seat) => {
+          //   return {
+          //     fanId: "63ab90e7a309e2a7d3d777a0", // TODO: get the user id from the backend
+          //     seatRow: seat.row,
+          //     seatColumn: seat.column,
+          //   };
+          // }),
+        },
+        {
+          headers: {
+            Token: token,
+          },
         }
       )
       .then((res) => {
@@ -164,6 +186,7 @@ function Tickets({ matchID }) {
                       { row: rowIndex + 1, column: columnIndex + 1 },
                     ]);
                   }
+                  console.log(selectedSeats);
                 }}
               ></div>
             ))}

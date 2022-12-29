@@ -72,16 +72,16 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 100%;
+  height: 90%;
   width: 100%;
   background-color: #dcc4ae;
   border-radius: 10px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 20px 10px;
   color: #645434;
 }
 
-.match-team {
+/* .match-team {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,18 +99,38 @@
   width: 100%;
 }
 
-.seat-number {
+.seatnumber{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50%;
-  width: 60%;
+  height: 100%;
+  width: 100%;
+} */
+
+.ticket-box-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  width: 100%;
+}
+
+.seat-number-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   background-color: #52ab7b;
   color: #fff;
   font-weight: 700;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
+}
+.seat-number-label{
+  text-align: center;
 }
 
 .no-reservations {
