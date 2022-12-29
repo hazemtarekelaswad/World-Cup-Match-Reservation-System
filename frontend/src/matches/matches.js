@@ -14,6 +14,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment";
+import Message from "../errorMessage/errorMessage";
 
 function Matches() {
   const token = localStorage.getItem("token");
@@ -34,6 +35,10 @@ function Matches() {
     time: "",
   });
 
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
   useEffect(() => {
     axios
       .get("https://qatar2022worldcupreservationsystem.onrender.com/matches")
@@ -42,12 +47,14 @@ function Matches() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, []);
 
   useEffect(() => {
     // use the token to get the teams
-    axios
+    {userType == "manager" && axios
       .get("https://qatar2022worldcupreservationsystem.onrender.com/teams", {
         headers: {
           Token: token,
@@ -58,12 +65,14 @@ function Matches() {
       })
       .catch((err) => {
         console.log(err);
-      });
+        setErrMsg(err.response.data.message);
+        setShow(true);
+      });}
   }, [teams.length]);
 
   useEffect(() => {
     // use the token to get the stadiums
-    axios
+    {userType == "manager" && axios
       .get("https://qatar2022worldcupreservationsystem.onrender.com/stadiums", {
         headers: {
           Token: token,
@@ -74,7 +83,9 @@ function Matches() {
       })
       .catch((err) => {
         console.log(err);
-      });
+        setErrMsg(err.response.data.message);
+        setShow(true);
+      });}
   }, [stadiums.length]);
 
   const handleAddMatch = (id) => {
@@ -136,6 +147,8 @@ function Matches() {
         })
         .catch((err) => {
           console.log(err);
+          setErrMsg(err.response.data.message);
+          setShow(true);
         });
     } else {
       axios
@@ -154,6 +167,8 @@ function Matches() {
         })
         .catch((err) => {
           console.log(err);
+          setErrMsg(err.response.data.message);
+          setShow(true);
         });
     }
   };
@@ -174,6 +189,8 @@ function Matches() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
   return (
@@ -185,6 +202,8 @@ function Matches() {
         </div>
         <div className="matches__content">
           <div className="matches_list">
+            {show && <Message message={errMsg} show={show} setShow={setShow} />}
+
             {matches.map((match, index) => (
               <div className="matches_list__container" key={index}>
                 <div

@@ -2,12 +2,19 @@ import React, { useState, useEffect } from "react";
 import Header from "./../components/header/header";
 import axios from "axios";
 import "./stadiums.css";
+import Message from "../errorMessage/errorMessage";
+
+
 function Stadiums() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // fan, admin, manager
   const [stadiums, setStadiums] = useState([]);
   const [stadium, setStadium] = useState({});
   const [added, setAdded] = useState(false);
+    
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
   useEffect(() => {
     // use the token to get the stadiums
     axios
@@ -21,6 +28,9 @@ function Stadiums() {
       })
       .catch((err) => {
         console.log(err);
+
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, [stadiums.length]);
 
@@ -48,6 +58,8 @@ function Stadiums() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
 
@@ -125,6 +137,7 @@ function Stadiums() {
               </tr>
             </tbody>
           </table>
+          {show && <Message message={errMsg} show={show} setShow={setShow} />}
         </div>
       </div>
     </div>

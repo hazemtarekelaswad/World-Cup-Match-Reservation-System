@@ -21,7 +21,7 @@ function Header() {
           <a href="/">Home</a>
           <a href="/matches">Matches</a>
           <a href="/teams">Teams</a>
-          <a href="/stadiums">Stadiums</a>
+          {role === "manager" && <a href="/stadiums">Stadiums</a>}
 
           {role === "admin" && <a href="/users">Users</a>}
         </div>

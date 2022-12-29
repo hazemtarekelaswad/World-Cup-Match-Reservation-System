@@ -12,6 +12,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
+import Message from "../errorMessage/errorMessage";
 
 function Profile() {
   const navigate = useNavigate();
@@ -29,6 +30,11 @@ function Profile() {
     nationality: "",
     password: "",
   });
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+
   useEffect(() => {
     axios
       .get("https://qatar2022worldcupreservationsystem.onrender.com/users/me", {
@@ -51,6 +57,9 @@ function Profile() {
       })
       .catch((err) => {
         console.log(err);
+
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, []);
 
@@ -99,6 +108,9 @@ function Profile() {
       })
       .catch((err) => {
         console.log(err);
+        
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
 
@@ -319,6 +331,8 @@ function Profile() {
                 </div>
               </div>
             )}
+            
+            {show && <Message message={errMsg} show={show} setShow={setShow} />}
 
             <div className="button-container" onClick={saveProfile}>
               <button> Save </button>

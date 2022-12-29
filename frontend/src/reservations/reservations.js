@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import moment from "moment";
+import Message from "../errorMessage/errorMessage";
 
 function Reservations() {
   const token = localStorage.getItem("token");
@@ -13,9 +14,12 @@ function Reservations() {
 
   const [reservations, setReservations] = useState([]); // after reformating
   
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   
   useEffect(() => {
-    setReservations(reservation.map((reserv) => {
+    let temp = []
+    temp = (reservation.map((reserv) => {
       return reserv.seats.map((seat) => {
         return {
           matchId: reserv.matchId,
@@ -30,14 +34,13 @@ function Reservations() {
         };
       });
     }));
-
-    // console.log(reservations);
+    setReservations(temp.flat());
+    console.log(reservations);
   }, [reservation]);
 
 
 
   // const [matches, setMatches] = useState([]);
-  let matches = [];
 
   useEffect(() => {
     // TODO: fetch reservations from backend
@@ -50,19 +53,23 @@ function Reservations() {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setReservation(res.data.reservations);
+        console.log(reservations);
       })
       .catch((err) => {
         console.log(err);
+        
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
 
   }, []);
 
 
-  const cancelReservation = (matchId, seatColumn, seatRow) => {
+  const cancelReservation = (matchId, seatRow, seatColumn) => {
     //TODO: delete reservation from backend
-    console.log(matchId, seatColumn, seatRow);
+    console.log(matchId,"column:", seatColumn, "row:", seatRow);
     axios
     .put("https://qatar2022worldcupreservationsystem.onrender.com/users/cancellation", {
       matchId: matchId,
@@ -80,6 +87,9 @@ function Reservations() {
     })
     .catch((err) => {
       console.log(err);
+      
+      setErrMsg(err.response.data.message);
+      setShow(true);
     });
   };
   return (
@@ -88,10 +98,11 @@ function Reservations() {
       <div className="reservations__container">
         <div className="reservations__header">
           <h1>Reservations</h1>
+          {show && <Message message={errMsg} show={show} setShow={setShow} />}
         </div>
-        {reservations[0] ? (
+        {reservations ? (
           <div className="reservations_list">
-            {reservations[0].map((reserv, id) => {
+            {reservations.map((reserv, id) => {
             {/* console.log(reserv); */}
             return ( 
                 <div className="reservation_list_item" key={id}>
@@ -101,7 +112,7 @@ function Reservations() {
                   >
                     <FontAwesomeIcon className="icon-item" icon={faTrash} />
                   </div>
-
+              
                   <div className="reservation_list_item_container">
                     <div className="ticket-box-container">
                       <div className="team1">{reserv.firstTeam}</div>

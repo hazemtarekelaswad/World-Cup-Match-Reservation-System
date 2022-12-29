@@ -12,7 +12,8 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { faFlag } from "@fortawesome/free-solid-svg-icons";
 // linemen
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
+import Message from "../errorMessage/errorMessage";
+ 
 function Tickets({ matchID }) {
   const token = localStorage.getItem("token");
   // console.log("token", token);
@@ -24,6 +25,33 @@ function Tickets({ matchID }) {
   const [columns, setColumns] = useState([]);
   const [occupiedSeats, setOccupiedSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const [userId, setUserId] = useState({});
+  const [columnCount, setColumnCount] = useState(0);
+  const [rowCount, setRowCount] = useState(0);
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
+  useEffect(() => {
+
+    axios
+    .get("https://qatar2022worldcupreservationsystem.onrender.com/users/me", {
+      headers: {
+        token: token,
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+      setUserId(res.data.userId);
+    })
+    .catch((err) => {
+      console.log(err);
+      setErrMsg(err.response.data.message);
+      setShow(true);
+    });
+
+  }, []);
   
   
   useEffect(() => {
@@ -38,15 +66,33 @@ function Tickets({ matchID }) {
         setColumns(Array(res.data.stadium.columnsCount).fill(0));
         setOccupiedSeats(
           res.data.fans.map((fan) => {
-            return { row: fan.seatRow, column: fan.seatColumn };
+            return { row: fan.seatRow, column: fan.seatColumn, fanId: fan.fanId };
           })
         );
+
+        setColumnCount(res.data.stadium.columnsCount);
+        setRowCount(res.data.stadium.rowsCount);
+
+        // to allow adjusting the seats he already reserved
+        // setOccupiedSeats(
+        //   res.data.fans.map((fan) => {
+        //     return fan.fanId !== userId && { row: fan.seatRow, column: fan.seatColumn, fanId: fan.fanId };
+        //   })
+        // );
+        // setSelectedSeats(
+        //   res.data.fans.map((fan) => {
+        //     return fan.fanId === userId && { row: fan.seatRow, column: fan.seatColumn, fanId: fan.fanId };
+        //   })
+        // );
         console.log(occupiedSeats);
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, [match.matchId]);
+
 
   const handleConfirm = () => {
     console.log(selectedSeats);
@@ -85,6 +131,8 @@ function Tickets({ matchID }) {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
   return (
@@ -124,6 +172,8 @@ function Tickets({ matchID }) {
           </div>
         </div>
       </div>
+      
+        {show && <Message message={errMsg} show={show} setShow={setShow} />}
 
       <div className="grid">
         <div className="grid__header">
@@ -156,8 +206,8 @@ function Tickets({ matchID }) {
                   if (
                     occupiedSeats.find(
                       (seat) =>
-                        seat.row === rowIndex + 1 &&
-                        seat.column === columnIndex + 1
+                        (seat.row === rowIndex + 1 &&
+                        seat.column === columnIndex + 1) && (seat.fanId !== userId)
                     )
                   )
                     return;
@@ -188,7 +238,9 @@ function Tickets({ matchID }) {
                   }
                   console.log(selectedSeats);
                 }}
-              ></div>
+              >
+                {(rowIndex) * columnCount + (columnIndex+1)}
+              </div>
             ))}
           </div>
         ))}

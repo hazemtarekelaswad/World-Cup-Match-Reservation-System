@@ -38,14 +38,14 @@
 }
 .stadiums__body > table > thead > tr > th {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #74052f;
   background-color: #74052f;
   color: #fff;
 }
 .stadiums__body > table > tbody > tr > td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #74052f;
   background-color: #fff;
   color: #74052f;

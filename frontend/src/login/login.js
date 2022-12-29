@@ -17,6 +17,7 @@ import moment from "moment";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_TOKEN } from "../store/actions";
+import Message from "../errorMessage/errorMessage";
 
 function Login({ signupParam }) {
   const [signup, setSignup] = useState(signupParam);
@@ -49,6 +50,11 @@ function Login({ signupParam }) {
     email: "",
     role: "fan",
   });
+
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
+
 
   function setUserOnChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -90,6 +96,9 @@ function Login({ signupParam }) {
       })
       .catch((err) => {
         console.log(err);
+
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }
 
@@ -109,6 +118,9 @@ function Login({ signupParam }) {
       })
       .catch((err) => {
         console.log(err);
+
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }
 
@@ -271,6 +283,8 @@ function Login({ signupParam }) {
                     </div>
                   </div>
                 )}
+                {show && <Message color={"red"} message={errMsg} show={show} setShow={setShow} />}
+
               </div>
             </div>
             <div className="footer">

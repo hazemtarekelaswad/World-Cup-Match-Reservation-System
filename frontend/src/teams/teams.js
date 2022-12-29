@@ -4,6 +4,7 @@ import "./teams.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import getFlag from "../getFlag";
+import Message from "../errorMessage/errorMessage";
 
 function Teams() {
   const token = localStorage.getItem("token");
@@ -11,6 +12,9 @@ function Teams() {
   const [teams, setTeams] = useState([]);
   const [userType, setUserType] = useState("fan"); // fan , manager , admin (get it from token)
   const [flags, setFlags] = useState([]);
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
     // use the token to get the teams
@@ -25,6 +29,8 @@ function Teams() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, [teams.length]);
 
@@ -36,6 +42,7 @@ function Teams() {
       </div>
       <div className="teams__content">
         <div className="teams_list">
+          {show && <Message message={errMsg} show={show} setShow={setShow} />}
           {teams.map((team, index) => (
             <div className="teams_list__item" key={index}>
               <div className="country">

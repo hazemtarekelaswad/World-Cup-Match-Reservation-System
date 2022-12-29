@@ -2,12 +2,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "./../components/header/header";
 import "./users.css";
+import Message from "../errorMessage/errorMessage";
+
 
 function Users() {
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role"); // fan, admin, manager
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+
+  const [show, setShow] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
     axios
@@ -25,6 +30,8 @@ function Users() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   }, []);
 
@@ -44,6 +51,8 @@ function Users() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
   const Delete = (id) => {
@@ -63,6 +72,8 @@ function Users() {
       })
       .catch((err) => {
         console.log(err);
+        setErrMsg(err.response.data.message);
+        setShow(true);
       });
   };
 
@@ -132,6 +143,9 @@ function Users() {
               <option value="approved">Active</option>
             </select>
           </div>
+
+          {show && <Message message={errMsg} show={show} setShow={setShow} />}
+
           <table>
             <thead>
               <tr>
