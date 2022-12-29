@@ -85,7 +85,7 @@ function Login({ signupParam }) {
           lastName: user.lastName,
           birthDate: moment(dateValue).format("yyyy-MM-DD"),
           gender: user.gender,
-          nationality: user.nationality,
+          nationality: user.nationality || "",
           email: user.email,
           role: user.role,
         }
