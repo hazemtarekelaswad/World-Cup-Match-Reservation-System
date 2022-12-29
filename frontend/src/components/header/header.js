@@ -37,9 +37,9 @@ function Header() {
         ) : (
           <div className="header__menuRight">
             <a href="/profile">Profile</a>.{/* cart */}
-            <a href="/reservations">
+            {role === "fan" && <a href="/reservations">
               <FontAwesomeIcon className="cart-icon" icon={faCartShopping} />
-            </a>
+            </a>}
             <FontAwesomeIcon
               className="logout-icon"
               icon={faSignOutAlt}

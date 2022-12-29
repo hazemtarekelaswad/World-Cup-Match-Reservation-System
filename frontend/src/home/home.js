@@ -41,9 +41,9 @@ function Home() {
                 <button className="background__content__buttons__button">
                   <a href="/matches">Matches</a>
                 </button>
-                <button className="background__content__buttons__button">
+                {role === "fan" && <button className="background__content__buttons__button">
                   <a href="/reservations">Tickets</a>
-                </button>
+                </button>}
               </div>
             )}
           </div>
