@@ -11,17 +11,24 @@ const { Team } = require('../models/team-model')
 
 
 const signup = async (req, res) => {
-    req.body.status = userHelper.userStatus.pending
+    
+    if (!("role" in req.body)) return res.status(400).send({
+        "status": "failure",
+        "message": "Provide a role (manager, fan, admin)"
+    })
+
+    req.body.status = (req.body.role === "manager") ? userHelper.userStatus.pending : userHelper.userStatus.approved
+
     if ("nationality" in req.body && req.body["nationality"] === "") delete req.body["nationality"]
-
-
+    
     // Validate all user data
     const { error } = userHelper.validateUserSignup(req.body)
     if (error) return res.status(400).send({
         "status": "failure",
         "message": error.details[0].message
     })
-
+    
+    
     // Validate uniqueness of username and email
     const user = await User.findOne({ $or: [{ email: req.body.email }, { username: req.body.username }] })
     if (user) return res.status(400).send({
@@ -144,6 +151,44 @@ const updateUser = async (req, res) => {
         "message": "User has been updated successfully"
     })
     
+}
+
+const updatePassword = async (req, res) => {
+    // Validate the request body
+    const { error } = userHelper.validatePasswordUpdate(req.body)
+    if (error) return res.status(400).send({
+        "status": "failure",
+        "message": error.details[0].message
+    })
+
+
+    const user = await User.findOne({ _id: req.authUser._id })
+
+    // Verify if the user is not found
+    if (!user) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    // Validate password correctness
+    const isEqual = await userHelper.comparePassword(req.body.oldPassword, user.password)    
+    if (!isEqual) return res.status(401).send({
+        "status": "failure",
+        "message": "Password is incorrect"
+    })
+
+    req.body.newPassword = await userHelper.hashPassword(req.body.newPassword)
+
+    const updatedUser = await User.findOneAndUpdate({ _id: req.authUser._id }, { $set: { "password": req.body.newPassword } })
+    if (!updatedUser) return res.status(400).send({
+        "status": "failure",
+        "message": "User does not exist in the system"
+    })
+
+    res.status(201).send({
+        "status": "success",
+        "message": "User's password has been updated successfully"
+    })
 }
 
 
@@ -415,6 +460,7 @@ module.exports = {
     reserveSeat,
     getReservations,
     cancelSeat,
-    getTeams
+    getTeams,
+    updatePassword
 }
 

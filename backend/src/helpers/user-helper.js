@@ -74,6 +74,15 @@ const validateSeatCancellation = (reservationInfo) => {
     return schema.validate(reservationInfo)
 }
 
+
+const validatePasswordUpdate = (passwordsInfo) => {
+    const schema = Joi.object({
+        oldPassword: Joi.string().min(8).max(50),
+        newPassword: Joi.string().min(8).max(50)
+    })
+    return schema.validate(passwordsInfo)
+}
+
 module.exports = {
     userStatus,
     hashPassword,
@@ -83,5 +92,6 @@ module.exports = {
     validateUserSignin,
     validateUserUpdate,
     validateSeatReservation,
-    validateSeatCancellation
+    validateSeatCancellation,
+    validatePasswordUpdate
 }

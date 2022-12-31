@@ -1,4 +1,5 @@
 const userHelper = require('../helpers/user-helper')
+const stadiumHelper = require('../helpers/stadium-helper')
 
 const { Match } = require('../models/match-model')
 const { Stadium } = require('../models/stadium-model')
@@ -127,25 +128,34 @@ const addStadium = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
+    // Validate all user data
+    const { error } = stadiumHelper.validateAddingStadium(req.body)
+    if (error) return res.status(400).send({
+        "status": "failure",
+        "message": error.details[0].message
+    })
+
     const stadium = await Stadium.findOne({ "name": req.body.name })
     if (stadium) return res.status(400).send({
         "status": "failure",
         "message": "Stadium has already been created, choose another name"
     })
 
-     const newStadium = new Stadium(req.body)
-     try {
-         await newStadium.save()
-         res.status(200).send({
-            "status": "success",
-            "message": "Stadium created successfully"
-        })
-     } catch (err) {
-         res.status(500).send({
-            "status": "failure",
-            "message": "Internal server error"
-        })
-     }
+
+
+    const newStadium = new Stadium(req.body)
+    try {
+        await newStadium.save()
+        res.status(200).send({
+           "status": "success",
+           "message": "Stadium created successfully"
+       })
+    } catch (err) {
+        res.status(500).send({
+           "status": "failure",
+           "message": "Internal server error"
+       })
+    }
  }
 
 const getStadiums = async (req, res) => {
