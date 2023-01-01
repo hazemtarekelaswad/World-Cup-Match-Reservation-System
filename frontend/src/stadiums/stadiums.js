@@ -37,6 +37,11 @@ function Stadiums() {
   const handleAddStadium = () => {
     // add stadium
     console.log("stadium: ", stadium);
+    if (stadium.rowsCount > 50 || stadium.columnsCount > 50) {
+      setErrMsg("Rows and Columns must be less than or equal 50");
+      setShow(true);
+      return;
+    }
     axios
       .post(
         "https://qatar2022worldcupreservationsystem.onrender.com/stadium",
