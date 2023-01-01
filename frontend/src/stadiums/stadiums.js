@@ -37,8 +37,8 @@ function Stadiums() {
   const handleAddStadium = () => {
     // add stadium
     console.log("stadium: ", stadium);
-    if (stadium.rowsCount > 50 || stadium.columnsCount > 50) {
-      setErrMsg("Rows and Columns must be less than or equal 50");
+    if (stadium.rowsCount > 50 || stadium.columnsCount > 20) {
+      setErrMsg("Columns must be less than or equal 20, and Rows must be less than or equal 50");
       setShow(true);
       return;
     }
@@ -124,7 +124,7 @@ function Stadiums() {
                     id="columns"
                     type="number"
                     placeholder="Columns"
-                    value={stadium.columnsCount > 50 ? 50 : (stadium.columnsCount < 3 ? 3 : stadium.columnsCount)}
+                    value={stadium.columnsCount > 20 ? 20 : (stadium.columnsCount < 3 ? 3 : stadium.columnsCount)}
                     onChange={(e) => {
                       setStadium({ ...stadium, columnsCount: e.target.value });
                     }}

@@ -107,7 +107,7 @@ function Login({ signupParam }) {
       )
       .then((res) => {
         console.log(res);
-        // setSignup(false);
+        setSignup(false);
         if (user.role == "fan") {
           loginOnClick();
         }

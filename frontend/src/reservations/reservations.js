@@ -100,7 +100,7 @@ function Reservations() {
           <h1>Reservations</h1>
           {show && <Message message={errMsg} show={show} setShow={setShow} />}
         </div>
-        {reservations ? (
+        {reservations.length ? (
           <div className="reservations_list">
             {reservations.map((reserv, id) => {
             {/* console.log(reserv); */}

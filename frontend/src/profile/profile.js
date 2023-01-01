@@ -8,7 +8,7 @@ import Dropdown from "react-dropdown";
 import moment from "moment";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faLock, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
@@ -28,7 +28,9 @@ function Profile() {
     gender: "",
     birthDate: "",
     nationality: "",
+    oldPassword: "",
     password: "",
+    confirmPassword: "",
   });
 
   const [show, setShow] = useState(false);
@@ -51,7 +53,7 @@ function Profile() {
           gender: res.data.gender,
           birthDate: moment(res.data.birthDate).format("YYYY-MM-DD"),
           nationality: res.data.nationality,
-          password: res.data.password ? res.data.password : "********",
+          password: res.data.password ? res.data.password : "",
         });
         console.log(profile);
       })
@@ -102,8 +104,14 @@ function Profile() {
       )
 
       .then((res) => {
-        setProfile(res.data);
-        window.location.reload();
+        // setProfile(res.data);
+        // window.location.reload();
+
+        if (profile.oldPassword)
+          updatePassword();
+        else
+          window.location.reload();
+
         console.log("Updated: ", res.data);
       })
       .catch((err) => {
@@ -113,6 +121,50 @@ function Profile() {
         setShow(true);
       });
   };
+
+
+  function updatePassword() {
+    if (profile.oldPassword) {
+
+      if (profile.password.length < 8) {
+        setErrMsg("Password must be at least 8 characters");
+        setShow(true);
+        return;
+      }
+
+      if (profile.password !== profile.confirmPassword) {
+        setErrMsg("Password and Confirm Password are not the same");
+        setShow(true);
+        return;
+      }
+      
+      console.log("password: ", profile.password, "oldPassword: ", profile.oldPassword)
+      axios 
+      .put("https://qatar2022worldcupreservationsystem.onrender.com/users/me/password", {
+        oldPassword: profile.oldPassword,
+        newPassword: profile.password,
+      }, 
+      {
+        headers: {
+          token: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      
+        setErrMsg(err.response.data.message);
+        setShow(true);
+      })
+    }else {
+      setErrMsg("Write Your Current password first");
+      setShow(true);
+      return;
+    }
+  }
 
   return (
     <div className="profile">
@@ -280,7 +332,7 @@ function Profile() {
             </div>
 
             <div className="profile-item">
-              <div className="label">Passowrd:</div>
+              <div className="label">Old Passowrd:</div>
               <div className="field-container">
                 <div
                   className={
@@ -291,10 +343,10 @@ function Profile() {
                   {password === false && (
                     <input
                       type="passowrd"
-                      name="password"
-                      id="password"
-                      placeholder="password"
-                      defaultValue={profile.password}
+                      name="oldPassword"
+                      id="oldPassword"
+                      placeholder="Old Password"
+                      defaultValue={""}
                       disabled={password}
                       onChange={setProfileOnChange}
                     />
@@ -308,6 +360,37 @@ function Profile() {
                 </div>
               </div>
             </div>
+
+            {!password && <div className="profile-item">
+              <div className="label">New Passowrd:</div>
+              <div className="field-container">
+                <div
+                  className={
+                    password ? "profile-field" : "profile-field edit-clicked"
+                  }
+                >
+                  {password === true && profile.password}
+                  {password === false && (
+                    <input
+                      type="passowrd"
+                      name="password"
+                      id="password"
+                      placeholder="password"
+                      defaultValue={""}
+                      disabled={password}
+                      onChange={setProfileOnChange}
+                    />
+                  )}
+                </div>
+                <div className="edit-icon" onClick={() => setPassword(false)}>
+                  <FontAwesomeIcon
+                    className="profile-icon"
+                    icon={faPenToSquare}
+                  />
+                </div>
+              </div>
+            </div>}
+
             {password === false && (
               <div className="profile-item">
                 <div className="label">Confirm passowrd:</div>
@@ -319,9 +402,9 @@ function Profile() {
                   >
                     <input
                       type="passowrd"
-                      name="password"
+                      name="confirmPassword"
                       id="password"
-                      placeholder="confirm password"
+                      placeholder="Confirm Password"
                       defaultValue={""}
                       disabled={password}
                       onChange={setProfileOnChange}
@@ -334,8 +417,9 @@ function Profile() {
             
             {show && <Message message={errMsg} show={show} setShow={setShow} />}
 
-            <div className="button-container" onClick={saveProfile}>
-              <button> Save </button>
+            <div className="button-container">
+              <button  onClick={saveProfile}> Save </button>
+              {/* <button on onClick={updatePassword}> updatePassword </button> */}
             </div>
           </div>
 
