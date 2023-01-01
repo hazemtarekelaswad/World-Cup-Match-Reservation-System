@@ -113,6 +113,7 @@ function Stadiums() {
                     id="rows"
                     type="number"
                     placeholder="Rows"
+                    value={stadium.rowsCount > 50 ? 50 : (stadium.rowsCount < 3 ? 3 : stadium.rowsCount)}
                     onChange={(e) => {
                       setStadium({ ...stadium, rowsCount: e.target.value });
                     }}
@@ -123,6 +124,7 @@ function Stadiums() {
                     id="columns"
                     type="number"
                     placeholder="Columns"
+                    value={stadium.columnsCount > 50 ? 50 : (stadium.columnsCount < 3 ? 3 : stadium.columnsCount)}
                     onChange={(e) => {
                       setStadium({ ...stadium, columnsCount: e.target.value });
                     }}
