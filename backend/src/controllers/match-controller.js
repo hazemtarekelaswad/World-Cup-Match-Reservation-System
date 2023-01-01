@@ -31,6 +31,7 @@ const createMatch = async (req, res) => {
         }
     }
 
+    
     if (!("stadium" in req.body)) return res.status(400).send({
         "status": "failure",
         "message": "stadium must be included in the request body"
