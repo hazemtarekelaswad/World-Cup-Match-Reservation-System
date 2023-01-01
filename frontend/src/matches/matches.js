@@ -195,6 +195,7 @@ function Matches() {
   };
 
   function getTrueTime(date) {
+    // console.log("date: ", date);
     // get time from date
     let time = date.split("T")[1].split(".")[0];
     // console.log("time: ", time);
@@ -396,9 +397,9 @@ function Matches() {
                         <input
                           //TODO: add match time in its format
                           type="time"
-                          value={match.date ? (getTrueTime(match.date)) : "00:00"}
+                          value={match.time}
                           onChange={(e) => {
-                            console.log(e.target.value);
+                            console.log(match);
                             setMatch({
                               ...match,
                               time: e.target.value,
@@ -456,7 +457,10 @@ function Matches() {
                       >
                         {editMatch ? "Update Match" : "Add Match"}
                       </button>
+                      
                     </div>
+                    {show && <Message color={"red"} message={errMsg} show={show} setShow={setShow}/>}
+
                   </div>
                 </div>
               </div>

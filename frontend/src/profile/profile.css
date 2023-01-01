@@ -34,7 +34,7 @@
 
 .profile-img-container{
     position: fixed;
-    right: 80px;
+    right: 75px;
     top: 50px;
     z-index: 100;
 }
@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-
+    z-index: 200;
 }
 
 .label{

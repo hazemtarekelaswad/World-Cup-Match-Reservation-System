@@ -423,11 +423,11 @@ function Profile() {
             </div>
           </div>
 
-          {/* <div className="profile-img-container">
+          <div className="profile-img-container">
             <div className="profile-img">
                <img className="profile-icon-img" src={tamema} alt="tamema" />
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>
