@@ -14,28 +14,40 @@ const createMatch = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
-    const matchs =await Match.find({$or:[{"firstTeam":req.body.firstTeam},{"secondTeam":req.body.firstTeam},{"firstTeam":req.body.secondTeam},{"secondTeam":req.body.secondTeam}]})
+    const matchs = await Match.find({$or:[{"firstTeam":req.body.firstTeam},{"secondTeam":req.body.firstTeam},{"firstTeam":req.body.secondTeam},{"secondTeam":req.body.secondTeam}]})
     console.log("🚀 ~ file: match-controller.js:11 ~ createMatch ~ matchs", matchs)
-    const d =new Date( req.body.date);
+    const d = new Date( req.body.date);
     console.log("🚀 ~ file: match-controller.js:14 ~ createMatch ~ d", d)
     let day = d.getDay();
     console.log("🚀 ~ file: match-controller.js:16 ~ createMatch ~ day", day)
 
 
-for (const match of matchs) {
-    if(new Date( match.date).getDay()==day){
-
-
-        return  res.status(400).send({
-            "status": "failure",
-            "message": "one of teams already has a match"
-        });
+    for (const match of matchs) {
+        if(new Date(match.date).getDay() == day){
+            return res.status(400).send({
+                "status": "failure",
+                "message": "one of teams already has a match"
+            });
+        }
     }
-}
-  
-    console.log("🚀 ~ file: match-controller.js:14 ~ createMatch ~ day", day)
-    const match =await Match.create(req.body)
-    console.log("🚀 ~ file: admin-controller.js:8 ~ getpandeng ~ users", match)
+
+    if (!("stadium" in req.body)) return res.status(400).send({
+        "status": "failure",
+        "message": "stadium must be included in the request body"
+    })
+
+    // Validate empty stadium
+    const matchesOnSameStadium = await Match.find({ "stadium": req.body.stadium })
+    for (let match of matchesOnSameStadium) {
+        if (new Date(req.body.date).getTime() >= new Date(match.date.getTime() - 3 * 60 * 60 * 1000)
+            && new Date(req.body.date).getTime() <= new Date(match.date.getTime() + 3 * 60 * 60 * 1000))
+            return res.status(400).send({
+                "status": "failure",
+                "message": "Match date is clashing with other match played at the same stadium"
+            })
+    }
+
+    const match = await Match.create(req.body)
     res.status(200).send({match});
 }
 
@@ -46,7 +58,7 @@ const updateMatch = async (req, res) => {
         "message": "Forbidden access. Must be a manager"
     })
 
-    const match =await Match.updateOne({ "_id": req.params.id }, { ...req.body })
+    const match = await Match.updateOne({ "_id": req.params.id }, { ...req.body })
     if (!match) return res.status(400).send({
         "status": "failure",
         "message": "match does not exist in the system"
