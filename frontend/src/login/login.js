@@ -42,6 +42,7 @@ function Login({ signupParam }) {
   const [user, setUser] = useState({
     username: "",
     password: "",
+    confirmPassword: "",
     firstName: "",
     lastName: "",
     birthDate: "",
@@ -58,6 +59,7 @@ function Login({ signupParam }) {
 
   function setUserOnChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
+    console.log(user);
   }
 
   function setGenderOnChange(event) {
@@ -70,6 +72,19 @@ function Login({ signupParam }) {
   }
 
   function signupOnClick() {
+
+    if (user.password.length < 8) {
+      setErrMsg("password must be at least 8 characters");
+      setShow(true);
+      return;
+    }
+
+    if (user.confirmPassword != user.password) {
+      setErrMsg("passwords do not match");
+      setShow(true);
+      return;
+    }
+
     setUser({
       ...user,
       ["birthDate"]: moment(dateValue).format("yyyy-MM-DD"),
@@ -270,6 +285,23 @@ function Login({ signupParam }) {
                     />
                   </div>
                 </div>
+                {signup && <div className="password-container">
+                  <div className="icon">
+                    <FontAwesomeIcon
+                      className="icon-item"
+                      icon={faUnlockKeyhole}
+                    />
+                  </div>
+                  <div className="input">
+                    <input
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="Confirm Password"
+                      onChange={(e) => setUserOnChange(e)}
+                    />
+                  </div>
+                </div>}
                 {signup && (
                   <div className="choose-role">
                     <div className="choose-role-container">
