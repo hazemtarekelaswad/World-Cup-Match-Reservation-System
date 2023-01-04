@@ -1,0 +1,178 @@
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: #fff;
+    margin-top: 180px;    
+}
+
+.profile .profile_header{
+    position: fixed;
+    top: 64px;
+    left: 0;
+    z-index: 90;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #74052f;
+    color: #fff;
+}
+
+.profile-content{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img-container{
+    position: fixed;
+    right: 75px;
+    top: 50px;
+    z-index: 100;
+}
+.profile-img{
+    width: 600px;
+    height: 600px;
+}
+
+.profile-icon-img{
+    width: 100%;
+    height: 100%;
+}
+
+.content-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 200;
+}
+
+.label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.profile-item{
+    height: 40px;
+    width: 35%;
+    min-width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.field-container{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.edit-icon{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    z-index: 1;
+}
+.profile-icon{
+    height: 60%;
+    width: 60%;
+}
+
+.profile-field{
+    width: 280px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.profile-field #firstname, .profile-field #lastname, .profile-field #nationality, .profile-field #password, .profile-field #oldPassword{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    padding: 0 10px;
+    font-weight: 600;
+}
+.Dropdown{
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    font-weight: 600;
+}
+.Dropdown-control{
+    background-color: transparent;
+    border: #000 solid 2px;
+    border-radius: 5px;
+}
+
+.profile-field{
+    width: 280px;
+    height: 40px;
+    border: none;
+    background-color: #ecfaff;
+    color: #000;
+    /* padding: 0 10px; */
+    font-weight: 600;
+}
+
+.edit-clicked{
+    background-color: #9ce5ff;
+}
+
+
+.profile .button-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* background-color: #8ad6ef; */
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: #645434;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.profile .button-container button{
+    width: fit-content;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #3bceff;
+    border: none;
+    color: #74052f;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.react-calendar{
+    z-index: 1000;
+}

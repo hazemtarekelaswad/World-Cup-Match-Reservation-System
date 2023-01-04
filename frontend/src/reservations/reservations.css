@@ -1,0 +1,147 @@
+.reservations__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+.reservations__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #74052f;
+  color: #fff;
+
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 5;
+}
+.cart {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow-y: scroll;
+}
+
+.reservations_list {
+  /*grid*/
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+  width: 80%;
+  height: 100%;
+  margin-top: 200px;
+  margin-bottom: 50px;
+}
+
+.reservation_list_item {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.delete-reservation {
+  position: absolute;
+  background-color: #74052f;
+  width: 30px;
+  height: 40px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: -20px;
+  left: 30px;
+
+  cursor: pointer;
+}
+
+.reservation_list_item_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 90%;
+  width: 100%;
+  background-color: #dcc4ae;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px 10px;
+  color: #645434;
+}
+
+/* .match-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.match-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.seatnumber{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+} */
+
+.ticket-box-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  width: 100%;
+}
+
+.seat-number-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #52ab7b;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 20px;
+}
+.seat-number-label{
+  text-align: center;
+}
+
+.no-reservations {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.no-reservations h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #74052f;
+}

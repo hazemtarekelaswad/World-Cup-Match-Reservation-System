@@ -1,0 +1,146 @@
+.cart {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow-y: scroll;
+}
+
+.profile_header {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 90;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #74052f;
+  color: #fff;
+}
+
+.reservations_list {
+  z-index: 80;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 50px;
+
+  /* flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+
+  /* width: 90%; */
+  margin: 20px 0 -110px 0;
+}
+
+.reservation_list_item {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.delete-reservation {
+  position: absolute;
+  background-color: #74052f;
+  width: 30px;
+  height: 40px;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: -20px;
+  left: 30px;
+
+  cursor: pointer;
+}
+
+.reservation_list_item_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+  background-color: #dcc4ae;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  color: #645434;
+}
+
+.match-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 15px 10px;
+  gap: 20px;
+}
+
+.match-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 10px;
+  gap: 10px;
+}
+
+.seat-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 10px;
+  gap: 20px;
+}
+
+.reservation_list_item_container {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ////////////////////cart bar/////////////////////// */
+.cart-container {
+  position: fixed;
+  left: 0;
+  top: 140px;
+  background-color: #74052f;
+  width: 100%;
+  height: 100%;
+  /* border-radius: 25px; */
+}
+
+.cart-container-icon {
+  position: relative;
+  left: 90vw;
+  top: -25px;
+  width: 50px;
+  height: 50px;
+  background-color: #8ad6ef;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon-item {
+  width: 20px;
+  height: 20px;
+}
+
+/* /////////////////////////////////////////// */

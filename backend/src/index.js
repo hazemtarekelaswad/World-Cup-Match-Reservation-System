@@ -13,7 +13,8 @@ const stadiumRoute = require('./routes/stadium-route')
 const adminRoute = require('./routes/admin-route')
 
 // Initializations
-const app = express()
+const app = express();
+app.use(cors());
 
 // DB Connection
 mongoose.connect(config.database.connection).then(() => { console.log('Connected successfully to DB') })

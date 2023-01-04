@@ -1,0 +1,66 @@
+.users__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+.users__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #74052f;
+  color: #fff;
+  position: fixed;
+  top: 64px;
+  left: 0;
+}
+.users__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  margin-top: 180px;
+  margin-bottom: 30px;
+}
+.users__table > table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+.users__table > table > thead > tr > th {
+  text-align: center;
+  padding: 16px;
+  background-color: #74052f;
+  color: #fff;
+  min-width: 100px;
+}
+.users__table > table > tbody > tr > td {
+  text-align: center;
+  padding: 16px;
+  border-bottom: 1px solid #ddd;
+  min-height: 25px;
+}
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.filter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}

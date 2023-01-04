@@ -3,6 +3,7 @@ const stadiumHelper = require('../helpers/stadium-helper')
 
 const { Match } = require('../models/match-model')
 const { Stadium } = require('../models/stadium-model')
+const { Team } = require('../models/team-model')
 
 
 

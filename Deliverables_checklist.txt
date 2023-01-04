@@ -1,0 +1,18 @@
+F1: Approve new users as an authority. 15 .........................[DONE]
+F2: Remove an existing user. 10....................................[DONE]
+F3: Create a new match event 15 ...................................[DONE]
+F4: Edit the details of an existing match 10 ......................[DONE]
+F5: Add a new stadium. 10 .........................................[DONE]
+F6: View Matches details (For managers) 10 ........................[DONE]
+F7: View vacant/reserved seats for each match. 15 .................[DONE]
+F8: Edit Customer data. 10 ........................................[DONE]
+F9: View matches details. (For customers) 10 ......................[DONE]
+
+F10: Reserve vacant seat(s) in future matches. 15 .................[]
+F11: Cancel a reservation 10 ......................................[]
+
+F12: Register a new account. 10 ...................................[DONE]
+F13: Sign in as an existing account 10 ............................[DONE]
+Automatic seats status update (BONUS) 5 ...........................[DONE]
+Backend real deployment on cloud servers 5 ........................[DONE]
+Professional styling of web pages UI/UX wise (BONUS) 10 ...........[DONE]

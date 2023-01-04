@@ -1,0 +1,66 @@
+.stadiums__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+.stadiums__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 100%;
+  background-color: #74052f;
+  color: #fff;
+
+  position: fixed;
+  top: 64px;
+  left: 0;
+}
+.stadiums__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 100px;
+}
+.stadiums__body > table {
+  margin-top: 100px;
+  width: 60%;
+  border-collapse: collapse;
+}
+.stadiums__body > table > thead > tr > th {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #74052f;
+  background-color: #74052f;
+  color: #fff;
+}
+.stadiums__body > table > tbody > tr > td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #74052f;
+  background-color: #fff;
+  color: #74052f;
+}
+.stadiums__button {
+  display: flex;
+  width: 100px;
+  height: 30px;
+  margin: 10px;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #74052f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}

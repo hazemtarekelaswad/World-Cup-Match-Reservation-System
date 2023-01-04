@@ -1,0 +1,129 @@
+.match {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.match__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* margin-bottom: 30px;
+  gap: 10%; */
+
+  background-color: #74052f;
+  color: #fff;
+
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 100%;
+}
+.match__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 160px;
+}
+.match__teams {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+.match__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 60%;
+  flex-wrap: wrap;
+}
+.match__info__item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+.grid__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 65%;
+  margin: 0 auto;
+  background-color: #f2c81e;
+  color: #fff;
+}
+.row {
+  background: #fff;
+  padding: 10px;
+  width: 65%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.seat {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: 2px;
+  border-radius: 3px;
+  background: #eee;
+  text-align: center;
+  line-height: 20px;
+  padding: 3px;
+}
+.seat.selected {
+  background: #f2c81e;
+  color: #fff;
+}
+.seat.occupied {
+  background: #645434;
+  color: #fff;
+}
+.seat-fan:hover {
+  cursor: pointer;
+}
+.seat-not-fan:hover {
+  cursor: not-allowed;
+}
+.seat.occupied:hover {
+  cursor: not-allowed;
+}
+.button {
+  background-color: #74052f;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  display: inline-block;
+  margin: 20px auto;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #a30a4a;
+}
+.button:disabled {
+  background-color: #ccc;
+  color: #000;
+  cursor: not-allowed;
+}
+.button:disabled:hover {
+  cursor: not-allowed;
+}

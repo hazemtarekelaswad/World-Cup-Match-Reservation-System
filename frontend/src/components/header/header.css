@@ -1,0 +1,81 @@
+.header {
+  background-color: #fff;
+  height: 4rem;
+  display: flex;
+  padding: 0 5vw;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  z-index: 200;
+}
+.header__logo {
+  height: 200px;
+  width: 120px;
+  object-fit: contain;
+  margin-right: 20px;
+  z-index: 100;
+  background-color: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding-top: 50px;
+}
+.header__logoImg {
+  height: 100%;
+  width: 80%;
+  object-fit: contain;
+  /*center image*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: auto;
+}
+.header__menu {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.header__menuLeft {
+  display: flex;
+  flex: 1;
+  align-items: left;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.header__menuRight {
+  display: flex;
+  flex: 1;
+  align-items: right;
+  justify-content: flex-end;
+  gap: 20px;
+}
+a {
+  color: #74052f;
+  text-decoration: wavy;
+  font-weight: bold;
+  font-size: 20px;
+}
+.header__menuRight a {
+  text-decoration: underline;
+}
+.header__menuLeft a {
+  text-decoration: underline;
+}
+
+.cart-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  color: #74052f;
+  margin-left: 15px;
+}

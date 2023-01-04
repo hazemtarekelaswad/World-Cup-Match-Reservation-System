@@ -1,0 +1,291 @@
+.login{
+    width: 100%;
+    height: 100vh;
+    background-image: url('../imges/t.png');
+    position: fixed;
+}
+
+.login-wrapper{
+    width: 40%;
+    height: 90%;
+    margin: auto auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login-container{
+    max-width: 500px;
+    min-width: 400px;
+    /* max-height: 600px;
+    min-height: 500px; */
+    width: 100%;
+    height: fit-content;
+    
+    
+}
+
+.signup-style{
+    top: -40px;
+    position: absolute;
+}
+
+.img-container{
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    position: relative;
+    z-index: 200;
+}
+
+.img{
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    margin: auto;
+    position: absolute;
+    top: 75px;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.form-container{
+    height: fit-content;
+    width: 100%;
+    background-color: #74052f;
+    border-radius: 25px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-wrapper{
+    width: 100%;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputs-container{
+    padding-top: 100px;
+    
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.username-container{
+    display: flex;
+}
+
+.password-container{
+    display: flex;
+}
+.choose-role{
+    display: flex;
+    width: 100%;
+}
+.choose-role-container{
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+}
+.choose-role-container .label{
+    font-size: 12px;
+}
+
+.input{
+    width: 260px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #ecfaff;
+}
+
+.input input {
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #ecfaff;
+    color: #000;
+}
+
+.input input::placeholder {
+    padding: 10px;
+    color: #000;
+}
+
+.icon{
+    width: 40px;
+    height: 40px;
+    background-color: #3bceff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer .button-container{
+    margin-bottom: 10px;
+    background-color: #3bceff;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    color: #1E1E40;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.footer .button-container button{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    background-color: #3bceff;
+    border: none;
+    color: #74052f;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.footer .button-container button:active{
+    transform: translateY(4px);
+}
+
+
+.icon-item{
+    width: 15px;
+    height: 15px;
+    color: white;
+}
+
+.icon-img{
+    width: 200px;
+    height: 200px;
+    color: white;
+}
+
+/* .button-container:hover{
+    background-color: #6c7a8a;
+} */
+
+.Name-container{
+    display: flex;
+    justify-content: space-between;
+    width: 298px;
+    height: 40px;
+}
+
+.last-name, .first-name{
+    width: 45%;
+    height: 40px;
+    
+}
+
+.last-name input::placeholder, .first-name input::placeholder {
+    padding: 15px;
+    color: #000;
+}
+
+.first-name input{
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #ecfaff;
+    color: #000;
+}
+
+.last-name input{
+    width: 99%;
+    height: 95%;
+    border: none;
+    background-color: #ecfaff;
+    color: #000;
+}
+
+.DatePicker{
+    color: #000;
+
+}
+
+.email-container{
+    display: flex;
+}
+.nationality-container{
+    display: flex;
+}
+
+
+.birth-date-container{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: #ecfaff;
+    padding: 0 5%;
+    color: #000;
+}
+
+.birth-date-container .label{
+    font-size: 12px;
+}
+
+.birth-date-container .DatePicker{
+    border: none;
+    min-width: 150px;
+}
+
+.gender-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    background-color: #ecfaff;
+}
+.Dropdown{
+    width: 260px;
+    background-color: #ecfaff;
+    border: none;
+}
+
+.footer{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.change-mode{
+    margin: 0 auto 10px;
+    color: #3bceff;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+DatePicker{
+    position: absolute;
+}
