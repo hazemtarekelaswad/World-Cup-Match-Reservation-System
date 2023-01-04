@@ -27,6 +27,5 @@ router.put('/matches/:id', auth.verifyToken, mangercontroller.updateMatch)
 router.post('/manager/match', auth.verifyToken, mangercontroller.createMatch)
 router.delete('/manager/match/:id', auth.verifyToken, mangercontroller.deleteMatch)
 
-router.get("/teams", auth.verifyToken, mangercontroller.getTeams);
 
 module.exports = router;
