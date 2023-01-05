@@ -169,6 +169,7 @@ const updatePassword = async (req, res) => {
         "status": "failure",
         "message": "User does not exist in the system"
     })
+    
 
     // Validate password correctness
     const isEqual = await userHelper.comparePassword(req.body.oldPassword, user.password)    
